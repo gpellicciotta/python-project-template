@@ -19,17 +19,18 @@ python-template-project/
   tests/
     test_core.py
     test_cli.py
+  docs/                # other documentation (design notes, detailed plans) - created as needed
   .github/
     workflows/
       ci.yml           # editable install + ruff + pytest + build, on push/PR
+  LICENSE              
   pyproject.toml       # project metadata, dependencies, dev extra, CLI entry point, ruff config
+  .gitignore 
   .editorconfig        # indent/charset/line-length, mirrors the ruff config for non-Python files/editors
   setup.ps1            # one-shot bootstrap: git init, venv, editable install, lint, tests, build
-  LICENSE              
-  RELEASES.md          # version history - top-level, all-uppercase
-  TODO.md              # prioritized backlog - top-level, all-uppercase
   CLAUDE.md
-  docs/                # other documentation (design notes, detailed plans) - created as needed
+  RELEASES.md          # version history - top-level, all-uppercase
+  TODO.md              # prioritized backlog - top-level, all-uppercase 
 ```
 
 The "src" layout places your package code under `src/{{package name}}/`. This prevents tests from accidentally
