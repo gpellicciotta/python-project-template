@@ -1,0 +1,125 @@
+# Python Template Project
+
+A minimal example project to get Python development started quickly using the src-layout.
+
+Includes pytest for testing, ruff for linting/formatting, build support with build/wheel, a GitHub Actions CI
+workflow, and the docs/versioning conventions (`RELEASES.md`, `TODO.md`, `CLAUDE.md`) used across all projects
+scaffolded from this template — see `CLAUDE.md` for the details Claude Code reads to follow them automatically.
+
+## Directory Layout
+
+```
+python-template-project/
+  src/
+    myproject/
+      __init__.py
+      core.py          # business logic
+      cli.py           # entry point (registered in pyproject.toml's [project.scripts])
+      scaffold.py      # `create` subcommand: copies + renames this template into a new project
+  tests/
+    test_core.py
+    test_cli.py
+  .github/
+    workflows/
+      ci.yml           # editable install + ruff + pytest + build, on push/PR
+  pyproject.toml       # project metadata, dependencies, dev extra, CLI entry point, ruff config
+  .editorconfig        # indent/charset/line-length, mirrors the ruff config for non-Python files/editors
+  setup.ps1            # one-shot bootstrap: git init, venv, editable install, lint, tests, build
+  LICENSE              
+  RELEASES.md          # version history - top-level, all-uppercase
+  TODO.md              # prioritized backlog - top-level, all-uppercase
+  CLAUDE.md
+  docs/                # other documentation (design notes, detailed plans) - created as needed
+```
+
+The "src" layout places your package code under `src/{{package name}}/`. This prevents tests from accidentally
+importing the local source tree instead of the installed package.
+
+Benefits:
+- Avoids import conflicts when running tests.
+- Encourages installing the package (editable or wheel) during development.
+- Widely adopted by PyPA projects and recommended for libraries.
+
+Alternatives:
+- Flat layout (package at project root): simpler for small scripts/apps but more prone to import issues during testing.
+- App-specific layouts: can vary depending on project type (CLI, web app, library).
+
+### Useful Resources
+- Python Packaging User Guide — Packaging Projects
+  https://packaging.python.org/en/latest/tutorials/packaging-projects/
+- PyPA sampleproject (src-layout example)
+  https://github.com/pypa/sampleproject
+- Real Python — Python application layouts
+  https://realpython.com/python-application-layouts/
+- pytest — Good practices (tests outside application code)
+  https://docs.pytest.org/en/stable/goodpractices.html#tests-outside-application-code
+- The Hitchhiker's Guide to Python — Project structure
+  https://docs.python-guide.org/writing/structure/
+
+## Quick Start (Windows PowerShell)
+Open PowerShell in the project root and run:
+
+```powershell
+. .\setup.ps1
+```
+
+This initializes a git repo (if one doesn't already exist), creates a virtual environment, installs the
+project in editable mode with the `dev` extra (pytest), runs the test suite, and builds a wheel/sdist into
+`bin/distributions/`.
+
+## Running Tests
+
+```powershell
+.venv\Scripts\python -m pytest
+```
+
+## Linting
+
+```powershell
+.venv\Scripts\ruff check .
+.venv\Scripts\ruff format --check .
+```
+
+## CLI
+
+```powershell
+myproject help                 # or --help / no args
+myproject version              # or --version
+myproject greet <name>         # sample business logic
+myproject create <project-name> [-o <output-dir>]
+```
+
+`create` scaffolds a new project as a copy of this template at `<output-dir>/<project-name>` (current directory
+if `-o` is omitted), automating the renames described below in **Starting a new project from this template**.
+Run it from an editable install of this template (i.e. after `. .\setup.ps1` or
+`pip install -e ".[dev]"` in this repo).
+
+## Building the Packages
+
+For building the source and binary (i.e. wheel) distribution packages:
+
+```powershell
+python -m build
+```
+
+The built packages will be in the `dist/` directory (or wherever `-o` points, e.g. `setup.ps1` uses
+`bin/distributions/`).
+
+## Starting a new project from this template
+
+Preferred: run `myproject create <project-name> [-o <output-dir>]` (see **CLI** above) — it does the copy and
+every rename below for you.
+
+To do it by hand instead: copy this folder, then rename every occurrence of the placeholder names below —
+they're easy to miss because nothing enforces consistency between them, and a leftover mismatch (e.g.
+`pyproject.toml`'s `name` not matching the actual `src/` package directory) breaks the build/install step
+silently rather than loudly:
+
+- `src/myproject/` → `src/<your_package_name>/`
+- `pyproject.toml`: `name = "template-project"` and `[project.scripts]`'s `myproject = "myproject.cli:main"`
+- `tests/test_core.py`'s `from myproject...` imports
+- This README's title, and `CLAUDE.md`'s placeholder sections
+- `RELEASES.md` — replace the `[Unreleased] v1.0.0` placeholder with your project's actual first entry once
+  there's something real to release
+
+Then follow **Quick Start** above to verify the rename didn't break anything before writing real code.

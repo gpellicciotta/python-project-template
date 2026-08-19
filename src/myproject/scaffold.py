@@ -1,0 +1,132 @@
+"""Creates a new project as a renamed copy of this template project."""
+
+from __future__ import annotations
+
+import re
+import shutil
+from pathlib import Path
+
+PACKAGE_NAME = "myproject"
+PROJECT_SLUG = "template-project"
+REPO_SLUG = "python-template-project"
+TITLE_PLACEHOLDER = "Python Template Project"
+
+_MARKER_FILES = ("pyproject.toml", "TODO.md", "RELEASES.md")
+_EXCLUDED_NAMES = {
+    ".git",
+    ".venv",
+    "venv",
+    "env",
+    "__pycache__",
+    "build",
+    "dist",
+    "bin",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".idea",
+    ".vscode",
+}
+
+
+class ScaffoldError(Exception):
+    """Raised when a new project can't be scaffolded from this template."""
+
+
+def find_template_root(start: Path) -> Path:
+    """Walk up from `start` to find this template project's root directory."""
+    for candidate in (start, *start.parents):
+        has_markers = all((candidate / name).is_file() for name in _MARKER_FILES)
+        if has_markers and (candidate / "src" / PACKAGE_NAME).is_dir():
+            return candidate
+    raise ScaffoldError(
+        "Could not locate the template project root (expected pyproject.toml, TODO.md, RELEASES.md and "
+        f"src/{PACKAGE_NAME}/ in a parent directory). `create` must be run against an editable install of "
+        f"{REPO_SLUG}."
+    )
+
+
+def _to_package_name(project_name: str) -> str:
+    package_name = re.sub(r"[^0-9a-zA-Z]+", "_", project_name).strip("_").lower()
+    if not re.match(r"^[a-z_][a-z0-9_]*$", package_name):
+        raise ScaffoldError(f"Cannot derive a valid Python package name from {project_name!r}.")
+    return package_name
+
+
+def _ignore(_dir: str, names: list[str]) -> set[str]:
+    return {name for name in names if name in _EXCLUDED_NAMES or name.endswith(".egg-info")}
+
+
+def _rewrite_text_files(root: Path, replacements: list[tuple[str, str]]) -> None:
+    for path in root.rglob("*"):
+        if path.is_dir():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, ValueError):
+            continue
+        new_text = text
+        for old, new in replacements:
+            new_text = new_text.replace(old, new)
+        if new_text != text:
+            path.write_text(new_text, encoding="utf-8")
+
+
+def _fresh_releases_md(title: str) -> str:
+    return (
+        "# Release Notes\n\n"
+        "All notes will be in reverse chronological order.\n\n"
+        "## [Unreleased] v1.0.0\n"
+        f"- Initial release of the {title} project.\n"
+    )
+
+
+def _fresh_todo_md() -> str:
+    return "# TODO\n\nOrdered by priority.\n"
+
+
+def _reset_pyproject_version(pyproject_path: Path) -> None:
+    text = pyproject_path.read_text(encoding="utf-8")
+    new_text = re.sub(r'(?m)^version = ".*"$', 'version = "0.0.1"', text, count=1)
+    pyproject_path.write_text(new_text, encoding="utf-8")
+
+
+def create_project(project_name: str, output_dir: str = ".", template_root: Path | None = None) -> Path:
+    """Create a new project at `output_dir/project_name`, as a renamed copy of this template.
+
+    Automates the manual steps documented in this template's README under "Starting a new project
+    from this template": copy the tree, rename the `myproject` package, replace the `template-project` /
+    `python-template-project` name placeholders throughout, and reset `RELEASES.md`, `TODO.md`, and
+    `pyproject.toml`'s `version` — the new project starts its own history rather than inheriting the
+    template's.
+    """
+    if template_root is None:
+        template_root = find_template_root(Path(__file__).resolve())
+
+    destination = Path(output_dir).resolve() / project_name
+    if destination.exists():
+        raise ScaffoldError(f"Destination {destination} already exists.")
+
+    package_name = _to_package_name(project_name)
+    title = project_name.replace("-", " ").replace("_", " ").title()
+
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(template_root, destination, ignore=_ignore)
+
+    if package_name != PACKAGE_NAME:
+        (destination / "src" / PACKAGE_NAME).rename(destination / "src" / package_name)
+
+    _rewrite_text_files(
+        destination,
+        [
+            (REPO_SLUG, project_name),
+            (PROJECT_SLUG, project_name),
+            (TITLE_PLACEHOLDER, title),
+            (PACKAGE_NAME, package_name),
+        ],
+    )
+
+    (destination / "RELEASES.md").write_text(_fresh_releases_md(title), encoding="utf-8")
+    (destination / "TODO.md").write_text(_fresh_todo_md(), encoding="utf-8")
+    _reset_pyproject_version(destination / "pyproject.toml")
+
+    return destination
