@@ -28,12 +28,12 @@ def test_create_scaffolds_renamed_project(tmp_path):
     destination = tmp_path / project_name
     assert destination.is_dir()
     assert (destination / "src" / "sample_app" / "cli.py").is_file()
-    assert not (destination / "src" / "myproject").exists()
+    assert [p.name for p in (destination / "src").iterdir() if p.is_dir()] == ["sample_app"]
 
     pyproject = (destination / "pyproject.toml").read_text(encoding="utf-8")
     assert 'name = "sample-app"' in pyproject
     assert 'version = "0.0.1"' in pyproject
-    assert "myproject" not in pyproject
+    assert 'sample_app = "sample_app.cli:main"' in pyproject
 
     readme = (destination / "README.md").read_text(encoding="utf-8")
     assert "Sample App" in readme

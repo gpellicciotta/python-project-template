@@ -2,6 +2,15 @@
 
 All notes will be in reverse chronological order.
 
+## 2026-08-19 v1.1.0
+- Renamed `docs/README.md` to `docs/index.md`.
+- Fixed `test_create_scaffolds_renamed_project` (`tests/test_cli.py`): its assertions hardcoded the
+  template's own placeholder name (`myproject`) to check that the *old* package/name references were gone,
+  but the test file itself is text-rewritten by `create`/`scaffold.py` when copied into a scaffolded
+  project, so those literals got swept up in the very rewrite pass they were meant to validate. Replaced
+  them with structural checks that survive being copied into their own test subject: exactly one directory
+  under `src/`, and the scripts entry matching the new project's own name.
+
 ## 2026-08-19 v1.0.0
 - First stable release. Published the repo to GitHub
   (https://github.com/gpellicciotta/python-project-template).
