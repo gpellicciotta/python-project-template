@@ -18,7 +18,7 @@ def test_version(capsys):
 
 def test_greet(capsys):
     assert main(["greet", "Gio"]) == 0
-    assert capsys.readouterr().out.strip() == "Hallo, Gio"
+    assert capsys.readouterr().out.strip() == "Hello, Gio"
 
 
 def test_create_scaffolds_renamed_project(tmp_path):

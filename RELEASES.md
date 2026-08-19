@@ -2,8 +2,13 @@
 
 All notes will be in reverse chronological order.
 
-## [Unreleased] v1.0.0
-- Initial release of the Python template project.
+## 2026-08-19 v1.0.0
+- First stable release. Published the repo to GitHub
+  (https://github.com/gpellicciotta/python-project-template).
+- Added a `docs/` folder (with a short explainer) so it exists from the start rather than only being
+  documented as "created as needed".
+- Fixed `setup.ps1`'s build step: the `dev` extra never included the `build` package, so `python -m build`
+  always failed with "No module named build" despite the editable install succeeding.
 
 ## 2026-08-19 v0.1.0
 - Added `myproject create <project-name> [-o <output-dir>]`, which scaffolds a new project as a renamed copy

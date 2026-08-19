@@ -32,8 +32,10 @@ state its one job, and flag anything a future change needs to respect (e.g. "the
 
 These apply to every project scaffolded from this template, not just this one:
 
-- Use semver (`MAJOR.MINOR.PATCH`); this project and its descendants start pre-1.0 (`0.x.y`), so breaking
-  changes are still expected but must be called out explicitly in `RELEASES.md` rather than reading as routine.
+- Use semver (`MAJOR.MINOR.PATCH`). Projects scaffolded from this template start pre-1.0 (`0.x.y` — see
+  `scaffold.py`'s version reset), so breaking changes are still expected early on but must be called out
+  explicitly in `RELEASES.md` rather than reading as routine. Once a project reaches `1.0.0`, a breaking
+  change requires a major version bump instead.
 - Favour simplicity over ingenuity. Keep things as simple as possible for what's actually needed today — don't
   design for hypothetical future requirements.
 - Minimize third-party dependencies. Reach for the standard library first; add a dependency only when it earns
@@ -47,9 +49,9 @@ These apply to every project scaffolded from this template, not just this one:
 ## Conventions
 
 - `RELEASES.md` (top-level) tracks version history: bump `pyproject.toml`'s `version` for every user-facing
-  change and add a matching dated entry to `RELEASES.md` with the same version number. This project is pre-1.0
-  (`0.x.y`), so call out breaking changes explicitly in the entry rather than letting them read as a routine
-  addition.
+  change and add a matching dated entry to `RELEASES.md` with the same version number. Pre-1.0 (`0.x.y`)
+  projects should call out breaking changes explicitly in the entry rather than letting them read as a routine
+  addition; at `1.0.0`+, a breaking change requires a major version bump instead.
 - `TODO.md` (top-level) is the prioritized backlog. When a TODO item is implemented, remove it and add the
   corresponding `RELEASES.md` entry instead of leaving both.
 - `RELEASES.md` and `TODO.md` live at the repo root, not under `docs/`, for visibility. Other documentation
