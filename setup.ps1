@@ -9,7 +9,7 @@ if (-not (Test-Path .git)) {
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 
-# Install the project in editable mode with the dev extra (currently just pytest).
+# Install the project in editable mode with the dev extra (pytest, ruff, build).
 # Editable install is the main dev loop: code changes are picked up immediately,
 # no rebuild/reinstall needed.
 python -m pip install --upgrade pip

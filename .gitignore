@@ -21,3 +21,6 @@ bin/
 # IDE/editor
 .vscode/
 .idea/
+
+# Parallel task worktrees
+work/

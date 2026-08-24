@@ -11,7 +11,7 @@ PROJECT_SLUG = "template-project"
 REPO_SLUG = "python-template-project"
 TITLE_PLACEHOLDER = "Python Template Project"
 
-_MARKER_FILES = ("pyproject.toml", "TODO.md", "RELEASES.md")
+_MARKER_FILES = ("pyproject.toml", "TODO.md", "CHANGELOG.md")
 _EXCLUDED_NAMES = {
     ".git",
     ".venv",
@@ -25,6 +25,7 @@ _EXCLUDED_NAMES = {
     ".ruff_cache",
     ".idea",
     ".vscode",
+    "work",
 }
 
 
@@ -39,7 +40,7 @@ def find_template_root(start: Path) -> Path:
         if has_markers and (candidate / "src" / PACKAGE_NAME).is_dir():
             return candidate
     raise ScaffoldError(
-        "Could not locate the template project root (expected pyproject.toml, TODO.md, RELEASES.md and "
+        "Could not locate the template project root (expected pyproject.toml, TODO.md, CHANGELOG.md and "
         f"src/{PACKAGE_NAME}/ in a parent directory). `create` must be run against an editable install of "
         f"{REPO_SLUG}."
     )
@@ -71,17 +72,31 @@ def _rewrite_text_files(root: Path, replacements: list[tuple[str, str]]) -> None
             path.write_text(new_text, encoding="utf-8")
 
 
-def _fresh_releases_md(title: str) -> str:
+def _fresh_changelog_md(title: str) -> str:
     return (
-        "# Release Notes\n\n"
-        "All notes will be in reverse chronological order.\n\n"
-        "## [Unreleased] v1.0.0\n"
-        f"- Initial release of the {title} project.\n"
+        "# Versioned Changes\n\n"
+        "A summarized overview of all changes, per version of this project.\n\n"
+        "> Entries will be added in reverse chronological order, so with the most recent at the top.\n"
+        ">\n"
+        "> Status codes used are:\n"
+        "> - `[in development]` - actively being developed\n"
+        "> - `[{{date}}]` - frozen/finalized on {{date}}\n"
+        "> - `[released: {{date}}]` - released to package manager or production on {{date}}\n"
+        "> - `[broken]` - considered broken and not be used\n\n"
+        "---\n\n"
+        "## v0.0.1 [in development]\n"
+        f"- Initial scaffold of the {title} project.\n"
     )
 
 
 def _fresh_todo_md() -> str:
-    return "# TODO\n\nOrdered by priority.\n"
+    return (
+        "# TODO\n\n"
+        "Shared task index for planned, active, and blocked work.\n"
+        "See [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md) for protocol details.\n\n"
+        "## Next Milestone\n\n"
+        "### Backlog\n"
+    )
 
 
 def _reset_pyproject_version(pyproject_path: Path) -> None:
@@ -95,7 +110,7 @@ def create_project(project_name: str, output_dir: str = ".", template_root: Path
 
     Automates the manual steps documented in this template's README under "Starting a new project
     from this template": copy the tree, rename the `myproject` package, replace the `template-project` /
-    `python-template-project` name placeholders throughout, and reset `RELEASES.md`, `TODO.md`, and
+    `python-template-project` name placeholders throughout, and reset `CHANGELOG.md`, `TODO.md`, and
     `pyproject.toml`'s `version` — the new project starts its own history rather than inheriting the
     template's.
     """
@@ -125,7 +140,7 @@ def create_project(project_name: str, output_dir: str = ".", template_root: Path
         ],
     )
 
-    (destination / "RELEASES.md").write_text(_fresh_releases_md(title), encoding="utf-8")
+    (destination / "CHANGELOG.md").write_text(_fresh_changelog_md(title), encoding="utf-8")
     (destination / "TODO.md").write_text(_fresh_todo_md(), encoding="utf-8")
     _reset_pyproject_version(destination / "pyproject.toml")
 

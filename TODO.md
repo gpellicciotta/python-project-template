@@ -1,3 +1,8 @@
 # TODO
 
-Ordered by priority.
+Shared task index for planned, active, and blocked work.
+See [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md) for protocol details.
+
+## Next Milestone
+
+### Backlog

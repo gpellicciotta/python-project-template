@@ -1,8 +1,26 @@
-# Release Notes
+# Versioned Changes
 
-All notes will be in reverse chronological order.
+A summarized overview of all changes, per version of this project.
 
-## 2026-08-19 v1.1.0
+> Entries will be added in reverse chronological order, so with the most recent at the top.
+> 
+> Status codes used are:
+> - `[in development]` - actively being developed
+> - `[{{date}}]` - frozen/finalized on {{date}}
+> - `[released: {{date}}]` - released to package manager or production on {{date}}
+> - `[broken]` - considered broken and not be used
+
+---
+
+## v1.2.0 [2026-08-24]
+- Aligned project with latest [development guidelines](https://github.com/gpellicciotta/dev-guidelines):
+  - Renamed `LICENSE` to `LICENSE.md` and `RELEASES.md` to `CHANGELOG.md` with version status tags.
+  - Restructured `TODO.md` with milestone sections (`## Next Milestone`, `### Backlog`) per coordinating work guidelines, and added `work/` to `.gitignore`.
+  - Added mandatory documentation files `docs/requirements.md` and `docs/devops.md`, and updated `docs/index.md`, `README.md`, and `CLAUDE.md`.
+  - Aligned CLI in `src/myproject/cli.py` to support action-oriented subcommands, `{name} v{version} - {copyright}` version output, standardized multi-line help with exit codes, and `-h`/`--help`/`--version`/`--verbose` options.
+  - Updated `scaffold.py` and test suite to verify the updated layout, docs, and CLI options.
+
+## v1.1.0 [released: 2026-08-19]
 - Renamed `docs/README.md` to `docs/index.md`.
 - Fixed `test_create_scaffolds_renamed_project` (`tests/test_cli.py`): its assertions hardcoded the
   template's own placeholder name (`myproject`) to check that the *old* package/name references were gone,
@@ -11,7 +29,7 @@ All notes will be in reverse chronological order.
   them with structural checks that survive being copied into their own test subject: exactly one directory
   under `src/`, and the scripts entry matching the new project's own name.
 
-## 2026-08-19 v1.0.0
+## v1.0.0 [released: 2026-08-19]
 - First stable release. Published the repo to GitHub
   (https://github.com/gpellicciotta/python-project-template).
 - Added a `docs/` folder (with a short explainer) so it exists from the start rather than only being
@@ -19,7 +37,7 @@ All notes will be in reverse chronological order.
 - Fixed `setup.ps1`'s build step: the `dev` extra never included the `build` package, so `python -m build`
   always failed with "No module named build" despite the editable install succeeding.
 
-## 2026-08-19 v0.1.0
+## v0.1.0 [released: 2026-08-19]
 - Added `myproject create <project-name> [-o <output-dir>]`, which scaffolds a new project as a renamed copy
   of this template (package rename, `pyproject.toml` name, and all `template-project` / `python-template-project`
   placeholder references), automating the manual steps previously described in the README.
@@ -29,7 +47,7 @@ All notes will be in reverse chronological order.
   from `pyproject.toml`'s `version`.
 - Added `ruff` (lint + format check) as a dev-extra tool, wired into `setup.ps1` and CI, with a 132-character
   line length. Added a matching `.editorconfig` (4-space indent, spaces only, UTF-8, 132-char lines).
-- Added the project's `LICENSE` file (MIT), matching the classifier already declared in `pyproject.toml`.
+- Added the project's `LICENSE.md` file (MIT), matching the classifier already declared in `pyproject.toml`.
 - Trimmed `[build-system].requires` to just `setuptools>=68` (removed `wheel` and `build`, neither of which
   is a build-backend dependency).
 - Documented general development guidelines and the style guide in `CLAUDE.md`.

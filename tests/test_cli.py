@@ -1,24 +1,59 @@
+from myproject import __version__
 from myproject.cli import main
 
 
 def test_help_exits_zero(capsys):
     assert main(["help"]) == 0
-    assert "usage:" in capsys.readouterr().out
+    out = capsys.readouterr().out
+    assert "myproject v" in out
+    assert "Usage:" in out
+    assert "Exit codes:" in out
+
+
+def test_help_flags(capsys):
+    assert main(["-h"]) == 0
+    assert "Usage:" in capsys.readouterr().out
+
+    assert main(["--help"]) == 0
+    assert "Usage:" in capsys.readouterr().out
+
+
+def test_help_verbose(capsys):
+    assert main(["help", "--verbose"]) == 0
+    out = capsys.readouterr().out
+    assert "Actions:" in out
+    assert "Options:" in out
+    assert "Exit codes:" in out
 
 
 def test_no_args_shows_help(capsys):
     assert main([]) == 0
-    assert "usage:" in capsys.readouterr().out
+    out = capsys.readouterr().out
+    assert "Usage:" in out
+    assert "Exit codes:" in out
 
 
-def test_version(capsys):
+def test_version_action_and_flag(capsys):
     assert main(["version"]) == 0
-    assert capsys.readouterr().out.strip()
+    out = capsys.readouterr().out.strip()
+    assert out == f"myproject v{__version__} - Copyright (c) 2026 Giovanni Pellicciotta"
+
+    assert main(["--version"]) == 0
+    out = capsys.readouterr().out.strip()
+    assert out == f"myproject v{__version__} - Copyright (c) 2026 Giovanni Pellicciotta"
 
 
 def test_greet(capsys):
     assert main(["greet", "Gio"]) == 0
     assert capsys.readouterr().out.strip() == "Hello, Gio"
+
+    assert main(["greet"]) == 0
+    assert capsys.readouterr().out.strip() == "Hello, wereld"
+
+    assert main(["greet", "Gio", "--verbose"]) == 0
+    out = capsys.readouterr().out
+    assert "Greeting target: Gio" in out
+    assert "Hello, Gio" in out
 
 
 def test_create_scaffolds_renamed_project(tmp_path):
@@ -38,12 +73,20 @@ def test_create_scaffolds_renamed_project(tmp_path):
     readme = (destination / "README.md").read_text(encoding="utf-8")
     assert "Sample App" in readme
 
-    releases = (destination / "RELEASES.md").read_text(encoding="utf-8")
-    assert "Initial release of the Sample App project." in releases
-    assert "ruff" not in releases
+    license_file = destination / "LICENSE.md"
+    assert license_file.is_file()
+
+    changelog = (destination / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "Initial scaffold of the Sample App project." in changelog
+    assert "ruff" not in changelog
 
     todo = (destination / "TODO.md").read_text(encoding="utf-8")
-    assert "github.com/gpellicciotta" not in todo
+    assert "## Next Milestone" in todo
+    assert "### Backlog" in todo
+
+    assert (destination / "docs" / "requirements.md").is_file()
+    assert (destination / "docs" / "devops.md").is_file()
+    assert (destination / "docs" / "index.md").is_file()
 
 
 def test_create_refuses_existing_destination(tmp_path):
@@ -51,3 +94,12 @@ def test_create_refuses_existing_destination(tmp_path):
     (tmp_path / project_name).mkdir()
 
     assert main(["create", project_name, "-o", str(tmp_path)]) == 1
+
+
+def test_create_missing_project_name(capsys):
+    assert main(["create"]) == 2
+    assert "error:" in capsys.readouterr().err
+
+
+def test_invalid_args():
+    assert main(["--invalid-option"]) == 2

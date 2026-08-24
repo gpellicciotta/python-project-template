@@ -3,8 +3,8 @@
 A minimal example project to get Python development started quickly using the src-layout.
 
 Includes pytest for testing, ruff for linting/formatting, build support with build/wheel, a GitHub Actions CI
-workflow, and the docs/versioning conventions (`RELEASES.md`, `TODO.md`, `CLAUDE.md`) used across all projects
-scaffolded from this template — see `CLAUDE.md` for the details Claude Code reads to follow them automatically.
+workflow, and the docs/versioning conventions (`CHANGELOG.md`, `TODO.md`, `CLAUDE.md`) following the cross-project
+[Development Guidelines](https://github.com/gpellicciotta/dev-guidelines) — see `CLAUDE.md` for the details Claude Code reads to follow them automatically.
 
 ## Directory Layout
 
@@ -19,18 +19,21 @@ python-template-project/
   tests/
     test_core.py
     test_cli.py
-  docs/                # other documentation (design notes, detailed plans) - created as needed
+  docs/
+    index.md           # documentation index
+    requirements.md    # high-level goals, functional & technical requirements
+    devops.md          # environment prerequisites, build/test/deploy procedures
   .github/
     workflows/
       ci.yml           # editable install + ruff + pytest + build, on push/PR
-  LICENSE              
+  LICENSE.md           # MIT license
   pyproject.toml       # project metadata, dependencies, dev extra, CLI entry point, ruff config
   .gitignore 
   .editorconfig        # indent/charset/line-length, mirrors the ruff config for non-Python files/editors
   setup.ps1            # one-shot bootstrap: git init, venv, editable install, lint, tests, build
   CLAUDE.md
-  RELEASES.md          # version history - top-level, all-uppercase
-  TODO.md              # prioritized backlog - top-level, all-uppercase 
+  CHANGELOG.md         # version history with status tags - top-level
+  TODO.md              # milestone task index (Next Milestone, Backlog) - top-level
 ```
 
 The "src" layout places your package code under `src/{{package name}}/`. This prevents tests from accidentally
@@ -46,16 +49,12 @@ Alternatives:
 - App-specific layouts: can vary depending on project type (CLI, web app, library).
 
 ### Useful Resources
-- Python Packaging User Guide — Packaging Projects
-  https://packaging.python.org/en/latest/tutorials/packaging-projects/
-- PyPA sampleproject (src-layout example)
-  https://github.com/pypa/sampleproject
-- Real Python — Python application layouts
-  https://realpython.com/python-application-layouts/
-- pytest — Good practices (tests outside application code)
-  https://docs.pytest.org/en/stable/goodpractices.html#tests-outside-application-code
-- The Hitchhiker's Guide to Python — Project structure
-  https://docs.python-guide.org/writing/structure/
+- Development Guidelines: https://github.com/gpellicciotta/dev-guidelines
+- Python Packaging User Guide — Packaging Projects: https://packaging.python.org/en/latest/tutorials/packaging-projects/
+- PyPA sampleproject (src-layout example): https://github.com/pypa/sampleproject
+- Real Python — Python application layouts: https://realpython.com/python-application-layouts/
+- pytest — Good practices (tests outside application code): https://docs.pytest.org/en/stable/goodpractices.html#tests-outside-application-code
+- The Hitchhiker's Guide to Python — Project structure: https://docs.python-guide.org/writing/structure/
 
 ## Quick Start (Windows PowerShell)
 Open PowerShell in the project root and run:
@@ -84,7 +83,7 @@ project in editable mode with the `dev` extra (pytest), runs the test suite, and
 ## CLI
 
 ```powershell
-myproject help                 # or --help / no args
+myproject help                 # or -h / --help (add --verbose for full option details)
 myproject version              # or --version
 myproject greet <name>         # sample business logic
 myproject create <project-name> [-o <output-dir>]
@@ -120,7 +119,6 @@ silently rather than loudly:
 - `pyproject.toml`: `name = "template-project"` and `[project.scripts]`'s `myproject = "myproject.cli:main"`
 - `tests/test_core.py`'s `from myproject...` imports
 - This README's title, and `CLAUDE.md`'s placeholder sections
-- `RELEASES.md` — replace the `[Unreleased] v1.0.0` placeholder with your project's actual first entry once
-  there's something real to release
+- `CHANGELOG.md` — replace the placeholder with your project's actual first entry once there's something real to release
 
 Then follow **Quick Start** above to verify the rename didn't break anything before writing real code.
