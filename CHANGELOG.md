@@ -13,6 +13,7 @@ A summarized overview of all changes, per version of this project.
 ---
 
 ## v1.2.0 [2026-08-24]
+- DevEx: Scope pytest to `tests/` so it no longer collides with sibling task worktrees under `work/`.
 - Aligned project with latest [development guidelines](https://github.com/gpellicciotta/dev-guidelines):
   - Renamed `LICENSE` to `LICENSE.md` and `RELEASES.md` to `CHANGELOG.md` with version status tags.
   - Restructured `TODO.md` with milestone sections (`## Next Milestone`, `### Backlog`) per coordinating work guidelines, and added `work/` to `.gitignore`.

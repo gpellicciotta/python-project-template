@@ -24,3 +24,6 @@ myproject = "myproject.cli:main"
 
 [tool.ruff]
 line-length = 132
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
