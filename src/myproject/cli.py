@@ -1,90 +1,31 @@
 from __future__ import annotations
 
-import argparse
 import sys
+
+from hinolugi_support.cli import build_action_parser, print_help, print_version
 
 from . import __version__
 from .core import greet
 from .scaffold import ScaffoldError, create_project
 
 TOOL_NAME = "myproject"
-COPYRIGHT = "Copyright (c) 2026 Giovanni Pellicciotta"
+AUTHOR = "2026 Giovanni Pellicciotta"
 DESCRIPTION = "Sample CLI for python-template-project providing greeting and project scaffolding."
-
-SHORT_USAGE = "myproject [help|version|greet|create] [args] [options]"
-
-LONG_USAGE = """myproject [help|version|greet|create] [args] [options]
-
-Actions:
-    help                             show this help message and exit
-    version                          show version information and exit
-    greet [NAME]                     print a greeting (sample business logic)
-    create PROJECT_NAME [-o DIR]     create a new project as a renamed copy of this template
-
-Options:
-    -h, --help                       show this help message and exit
-    --version                        show version information and exit
-    --verbose                        show detailed usage and execution info
-    -o, --output-dir DIR             destination directory for create (default: .)"""
-
-SHORT_EXIT_CODES = """Exit codes:
-    0  success
-    1  application or command execution error
-    2  invalid command-line arguments"""
+ACTIONS = ["help", "version", "greet", "create"]
+EXIT_CODES = [
+    (0, "Success"),
+    (1, "Application or command execution error"),
+    (2, "Invalid command-line arguments"),
+]
 
 
-def version_text() -> str:
-    """Return single-line formatted version string per development guidelines."""
-    return f"{TOOL_NAME} v{__version__} - {COPYRIGHT}"
-
-
-def print_help(verbose: bool = False) -> None:
-    """Print formatted multi-line help message per development guidelines."""
-    print(version_text())
-    print()
-    print(DESCRIPTION)
-    print()
-    if verbose:
-        print(LONG_USAGE)
-        print()
-        print(SHORT_EXIT_CODES)
-    else:
-        print(f"Usage: {SHORT_USAGE}\n\n{SHORT_EXIT_CODES}\n\nRun with --verbose for full option details.")
-
-
-def build_parser() -> argparse.ArgumentParser:
-    """Build the argument parser for CLI actions and options."""
-    parser = argparse.ArgumentParser(
-        prog=TOOL_NAME,
-        description=DESCRIPTION,
-        add_help=False,
-    )
-    parser.add_argument("-h", "--help", action="store_true", help="Show this help message and exit")
-    parser.add_argument("--version", action="store_true", help="Show version information and exit")
-    parser.add_argument("--verbose", action="store_true", help="Show detailed usage or execution info")
-
-    subparsers = parser.add_subparsers(dest="command")
-
-    help_parser = subparsers.add_parser("help", add_help=False, help="Show usage info")
-    help_parser.add_argument("-h", "--help", action="store_true", help=argparse.SUPPRESS)
-    help_parser.add_argument("--verbose", action="store_true", help=argparse.SUPPRESS)
-
-    version_parser = subparsers.add_parser("version", add_help=False, help="Show version information")
-    version_parser.add_argument("-h", "--help", action="store_true", help=argparse.SUPPRESS)
-
-    greet_parser = subparsers.add_parser("greet", add_help=False, help="Print a greeting (sample business logic)")
-    greet_parser.add_argument("name", nargs="?", default="wereld", help="Name to greet")
-    greet_parser.add_argument("-h", "--help", action="store_true", help=argparse.SUPPRESS)
-    greet_parser.add_argument("--verbose", action="store_true", help="Show verbose greeting")
-
-    create_parser = subparsers.add_parser("create", add_help=False, help="Create a new project as a renamed copy of this template")
-    create_parser.add_argument("project_name", nargs="?", default=None, help="Name for the new project")
-    create_parser.add_argument(
+def build_parser():
+    """Build the argument parser on top of the shared hinolugi-support action/help/version template."""
+    parser = build_action_parser(TOOL_NAME, DESCRIPTION, ACTIONS, default_action="help")
+    parser.add_argument("target", nargs="?", default=None, help="Name to greet ('greet'), or project name ('create')")
+    parser.add_argument(
         "-o", "--output-dir", default=".", help="Directory to create the new project under (default: current directory)"
     )
-    create_parser.add_argument("-h", "--help", action="store_true", help=argparse.SUPPRESS)
-    create_parser.add_argument("--verbose", action="store_true", help="Show verbose output during creation")
-
     return parser
 
 
@@ -96,38 +37,34 @@ def main(argv: list[str] | None = None) -> int:
     except SystemExit as exc:
         return int(exc.code) if isinstance(exc.code, int) else 2
 
-    # Check top-level flags or subcommands requesting version first
-    if getattr(args, "version", False) or args.command == "version":
-        print(version_text())
+    if args.version or args.action == "version":
+        print_version(TOOL_NAME, __version__, author=AUTHOR)
         return 0
 
-    # Check top-level flags or subcommands requesting help
-    if getattr(args, "help", False) or args.command in (None, "help"):
-        print_help(verbose=getattr(args, "verbose", False))
+    if args.help or args.action == "help":
+        print_help(TOOL_NAME, __version__, DESCRIPTION, parser, exit_codes=EXIT_CODES, author=AUTHOR)
         return 0
 
-    if args.command == "greet":
-        if getattr(args, "verbose", False):
-            print(f"Greeting target: {args.name}")
-        print(greet(args.name))
+    if args.action == "greet":
+        name = args.target or "wereld"
+        if args.verbose:
+            print(f"Greeting target: {name}")
+        print(greet(name))
         return 0
 
-    if args.command == "create":
-        if not args.project_name:
-            print("error: project_name is required for create action", file=sys.stderr)
-            return 2
-        if getattr(args, "verbose", False):
-            print(f"Scaffolding project '{args.project_name}' into '{args.output_dir}'...")
-        try:
-            destination = create_project(args.project_name, args.output_dir)
-        except ScaffoldError as exc:
-            print(f"error: {exc}", file=sys.stderr)
-            return 1
-        print(f"Created new project at {destination}")
-        return 0
-
-    print_help()
-    return 2
+    # only "create" remains, since args.action is constrained to ACTIONS
+    if not args.target:
+        print("error: project_name is required for create action", file=sys.stderr)
+        return 2
+    if args.verbose:
+        print(f"Scaffolding project '{args.target}' into '{args.output_dir}'...")
+    try:
+        destination = create_project(args.target, args.output_dir)
+    except ScaffoldError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    print(f"Created new project at {destination}")
+    return 0
 
 
 if __name__ == "__main__":

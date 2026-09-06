@@ -6,30 +6,30 @@ def test_help_exits_zero(capsys):
     assert main(["help"]) == 0
     out = capsys.readouterr().out
     assert "myproject v" in out
-    assert "Usage:" in out
+    assert "usage:" in out
     assert "Exit codes:" in out
 
 
 def test_help_flags(capsys):
     assert main(["-h"]) == 0
-    assert "Usage:" in capsys.readouterr().out
+    assert "usage:" in capsys.readouterr().out
 
     assert main(["--help"]) == 0
-    assert "Usage:" in capsys.readouterr().out
+    assert "usage:" in capsys.readouterr().out
 
 
-def test_help_verbose(capsys):
-    assert main(["help", "--verbose"]) == 0
+def test_help_lists_actions_and_options(capsys):
+    assert main(["help"]) == 0
     out = capsys.readouterr().out
-    assert "Actions:" in out
-    assert "Options:" in out
+    assert "positional arguments:" in out
+    assert "options:" in out
     assert "Exit codes:" in out
 
 
 def test_no_args_shows_help(capsys):
     assert main([]) == 0
     out = capsys.readouterr().out
-    assert "Usage:" in out
+    assert "usage:" in out
     assert "Exit codes:" in out
 
 
