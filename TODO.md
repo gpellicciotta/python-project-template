@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] A0021 Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
+- [~] A0021 [owner: @claude] Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
 
 ---
 
