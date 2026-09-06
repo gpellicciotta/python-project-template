@@ -24,8 +24,8 @@ pytest -q
 
 # Build sdist + wheel (optional - only needed when producing a distributable
 # artifact, e.g. to hand someone a .whl or publish to a package index).
-if (Test-Path ./bin) {
-    Remove-Item -Recurse -Force ./bin
+# Uses the same ./dist/ output location as a plain `python -m build` and CI.
+if (Test-Path ./dist) {
+    Remove-Item -Recurse -Force ./dist
 }
-New-Item -ItemType Directory -Path ./bin/distributions -Force | Out-Null
-python -m build -o ./bin/distributions
+python -m build

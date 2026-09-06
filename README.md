@@ -71,7 +71,7 @@ Open PowerShell in the project root and run:
 
 This initializes a git repo (if one doesn't already exist), creates a virtual environment, installs the
 project in editable mode with the `dev` extra (pytest), runs the test suite, and builds a wheel/sdist into
-`bin/distributions/`.
+`dist/`.
 
 ## Running Tests
 
@@ -108,8 +108,7 @@ For building the source and binary (i.e. wheel) distribution packages:
 python -m build
 ```
 
-The built packages will be in the `dist/` directory (or wherever `-o` points, e.g. `setup.ps1` uses
-`bin/distributions/`).
+The built packages will be in the `dist/` directory — the same location `setup.ps1`'s build step uses.
 
 ## Installation and Releases
 

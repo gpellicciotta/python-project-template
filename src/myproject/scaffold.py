@@ -20,7 +20,6 @@ _EXCLUDED_NAMES = {
     "__pycache__",
     "build",
     "dist",
-    "bin",
     ".pytest_cache",
     ".ruff_cache",
     ".idea",

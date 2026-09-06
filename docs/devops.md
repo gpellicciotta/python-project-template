@@ -105,7 +105,7 @@ To build source distributions (`sdist`) and wheels (`bdist_wheel`):
 python -m build
 ```
 
-Built packages are written to `dist/` (or `bin/distributions/` if using `setup.ps1`).
+Built packages are written to `dist/` — `setup.ps1`'s build step uses the same location.
 
 ---
 
