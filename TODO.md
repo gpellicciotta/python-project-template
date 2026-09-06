@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] A0006 Add a release/publish GitHub Actions workflow (trigger on `release: published`, build sdist/wheel, upload to the release) plus a README "installing from a release" section, mirroring hinolugi-support.python's `publish.yml`.
+- [~] A0006 [owner: @gemini] Add a release/publish GitHub Actions workflow (trigger on `release: published`, build sdist/wheel, upload to the release) plus a README "installing from a release" section, mirroring hinolugi-support.python's `publish.yml`.
 - [ ] A0007 Scaffold `docs/specs/`, `docs/adrs/`, and `docs/issues/` placeholders and link them from `docs/index.md`; dev-guidelines mandates them but the template's docs/index.md doesn't mention any of the three.
 - [ ] A0008 Scaffold a tracked `tasks/` directory (placeholder file) so new projects start with the location coordinating-work-guidelines.md requires for full-task files.
 - [ ] A0009 Fix `scaffold.py`'s `_reset_pyproject_version` to reset to a `-pre` version (e.g. `0.0.1-pre`) so scaffolded projects start compliant with the versioning guideline instead of needing a later fix-up.
