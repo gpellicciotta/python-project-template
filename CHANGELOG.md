@@ -13,6 +13,7 @@ A summarized overview of all changes, per version of this project.
 ---
 
 ## v1.3.1-pre
+- Build: Declared license file and project URLs in `pyproject.toml`, rewritten automatically when scaffolding.
 - DevEx: Standardized `setup.ps1`'s build step to output into `dist/`, matching `python -m build` and CI.
 - DevEx: Added `src` to pytest's `pythonpath` so tests run without a prior editable install.
 

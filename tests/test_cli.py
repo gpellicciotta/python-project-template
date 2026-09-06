@@ -71,6 +71,9 @@ def test_create_scaffolds_renamed_project(tmp_path):
     assert 'sample_app = "sample_app.cli:main"' in pyproject
     assert "[tool.ruff.lint]" in pyproject
     assert 'select = ["E4", "E7", "E9", "F"]' in pyproject
+    assert 'license = {file = "LICENSE.md"}' in pyproject
+    assert "https://github.com/gpellicciotta/sample-app" in pyproject
+    assert "python-template-project" not in pyproject
 
     readme = (destination / "README.md").read_text(encoding="utf-8")
     assert "Sample App" in readme
