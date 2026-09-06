@@ -17,17 +17,23 @@ An overview of all tasks and their planning.
 > - Metadata: `[label: value]` immediately following the task ID (e.g. `[owner: name]`, `[needs: Tnnnn]`, `[continue-after: YYYY-MM-DD]`, `[blocked: reason]`).
 > - Description: Natural-language sentence ($\le 20$ words once a task file exists; longer/multi-line permitted initially). Slugs are never used in TODO.md.
 
-**Next ID:** 0016
+**Next ID:** 0023
 
 ---
 
 ## Next Milestone
 
-- [~] T0013 [owner: @gemini] Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
+*(Currently no tasks)*
 
 ---
 
 ## Backlog
 
-*(Currently no tasks)*
+- [ ] A0016 [owner: @gio] Add source directory to pytest pythonpath so tests run against source without prior editable installation.
+- [ ] A0017 [owner: @gio] Declare license file and repository URLs in pyproject.toml and update project scaffolding to rewrite them.
+- [ ] A0018 [owner: @gio] Provide a cross-platform Python bootstrap script alongside setup.ps1 to support non-Windows environments out of the box.
+- [ ] A0019 [owner: @gio] Refactor sample CLI to use hinolugi-support CLI helpers instead of duplicating custom argparse and help boilerplate.
+- [ ] A0020 [owner: @gio] Modernize CI workflow with setup-python v5, explicit read permissions, and distribution artifact archiving.
+- [ ] A0021 [owner: @gio] Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
+- [ ] A0022 [owner: @gio] Standardize local build distribution output location between setup.ps1 and package build workflows.
 
