@@ -49,6 +49,36 @@ This repository and all projects scaffolded from this template follow the cross-
 - CLI design: prefer action-oriented, subcommand-based CLIs (`tool action [options]`). Provide `help` action /
   `-h` / `--help`, `version` action / `--version`, `--verbose` option, and standardized `{name} v{version} - {copyright}`
   header with exit codes.
+- Logging: direct operational logging to a log file and standard streams per cross-project guidelines using
+  `hinolugi-support`'s `hinolugi_support.logging.CliLogger` and `LogLevel` (dual destination, `--log-file`,
+  startup/completion lifecycle banners via `log_start`/`log_end`, padded severity tags, and `--debug` filtering)
+  instead of reimplementing a local starter module — see `## Logging` below.
+
+## Logging
+
+Operational and CLI logging follows the cross-project [Development Guidelines](https://github.com/gpellicciotta/dev-guidelines) (`general-guidelines.md`'s Logging section). Projects scaffolded from this template inherit the `hinolugi-support` dependency (added by A0014 in `pyproject.toml`) and use `hinolugi_support.logging.CliLogger` and `LogLevel` instead of reimplementing a local starter module:
+
+```python
+import sys
+from pathlib import Path
+from hinolugi_support.logging import CliLogger, LogLevel
+
+logger = CliLogger(log_path=Path("logs/app.log"), verbose=True, debug=False, origin="myproject")
+logger.log_start("myproject", __version__, sys.argv, config={"output_dir": "."})
+logger.info("Informational message to file and stdout")
+logger.warning("Warning message to file and stderr")
+logger.error("Error message to file and stderr")
+logger.debug("Debug message written to file only when debug=True")
+logger.log_end("Success summary")
+```
+
+Key conventions:
+- Direct operational logging to a log file (`--log-file <path>`) and standard streams (`stdout`/`stderr`).
+- Log startup details via `logger.log_start(name, version, argv, config)` in a standardized multi-line banner.
+- Log completion summary and elapsed duration via `logger.log_end(summary)` upon exit.
+- Pad severity tags to 5 characters enclosed in double asterisks and brackets (`**[ERROR]**`, `**[WARN]** `, `**[INFO]** `, `**[DEBUG]**`).
+- Suppress timestamps and `INFO` severity tags when emitting to stdout.
+- Discard `DEBUG` messages unless `--debug` is explicitly enabled.
 
 ## Conventions
 

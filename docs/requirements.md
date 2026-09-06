@@ -35,6 +35,11 @@ Functional and technical requirements for the `python-project-template` reposito
   - `1`: Application or command execution failure.
   - `2`: Invalid command-line arguments.
 
+### Logging
+- Support operational and CLI logging adhering to cross-project guidelines (`general-guidelines.md`):
+  - Utilize `hinolugi-support`'s `hinolugi_support.logging.CliLogger` and `LogLevel` rather than reimplementing local logging utilities.
+  - Support `--log-file`, dual-destination output, startup and completion lifecycle banners, padded severity indicators, and debug filtering.
+
 ---
 
 ## Technical Requirements

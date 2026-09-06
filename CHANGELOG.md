@@ -13,6 +13,7 @@ A summarized overview of all changes, per version of this project.
 ---
 
 ## v1.2.2-pre
+- Docs: Wire CLAUDE.md logging guidance to hinolugi-support's CliLogger and LogLevel instead of local modules.
 - DevEx: Add hinolugi-support dependency so derived projects inherit shared support utilities.
 - DevEx: Add all log files to .gitignore.
 - Docs: Align task and documentation files with latest dev-guidelines and hinolugi-support.python conventions.
