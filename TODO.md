@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] A0018 Provide a cross-platform Python bootstrap script to replace setup.ps1
+- [~] A0018 [owner: @claude] Provide a cross-platform Python bootstrap script to replace setup.ps1
 - [ ] A0019 Refactor sample CLI to use hinolugi-support CLI helpers instead of duplicating custom argparse and help boilerplate.
 - [ ] A0020 Modernize CI workflow with setup-python v5, explicit read permissions, and distribution artifact archiving.
 - [ ] A0021 Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
