@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] A0022 Standardize local build distribution output location between setup.ps1 and package build workflows.
+- [~] A0022 [owner: @claude] Standardize local build distribution output location between setup.ps1 and package build workflows.
 - [ ] A0016 Add source directory to pytest pythonpath so tests run against source without prior editable installation.
 - [ ] A0017 Declare license file and repository URLs in pyproject.toml and update project scaffolding to rewrite them.
 - [ ] A0018 Provide a cross-platform Python bootstrap script to replace setup.ps1
