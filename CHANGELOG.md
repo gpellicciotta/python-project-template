@@ -13,6 +13,7 @@ A summarized overview of all changes, per version of this project.
 ---
 
 ## v1.3.1-pre
+- DevEx: Upgraded CI to setup-python v5, added read-only permissions, and archived build artifacts.
 - DevEx: Refactored sample CLI to build on `hinolugi-support`'s shared argparse version/help helpers.
 - DevEx: Replaced Windows-only `setup.ps1` with a cross-platform `scripts/bootstrap-dev-environment.py`.
 - Build: Declared license file and project URLs in `pyproject.toml`, rewritten automatically when scaffolding.
