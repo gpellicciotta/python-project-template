@@ -112,13 +112,15 @@ Built packages are written to `dist/` (or `bin/distributions/` if using `setup.p
 ## Release Process
 
 Ongoing work accumulates under the top `CHANGELOG.md` heading while it carries a `-pre` SemVer suffix (e.g.
-`## v1.2.2-pre`), which must always match `version` in `pyproject.toml` (the single source of truth) exactly,
+`## v1.3.1-pre`), which must always match `version` in `pyproject.toml` (the single source of truth) exactly,
 `-pre` included.
 
 1. Confirm the top `CHANGELOG.md` heading's version and `pyproject.toml`'s `version` already agree.
 2. Freeze: replace the heading's `-pre` suffix with `[{{date}}]`, and drop `-pre` from `pyproject.toml`'s
    `version` so both again match exactly. In the same commit, add the next patch version's `## vX.Y.Z-pre`
-   heading above it and bump `pyproject.toml`'s `version` to match.
+   heading above it, but leave `pyproject.toml`'s `version` at the bare frozen version — bumping it to the next
+   `-pre` now would make the following publish step publish the wrong version. Only bump `pyproject.toml` to the next
+   `-pre` in the first real commit of the next dev cycle.
 3. Perform a clean verification build:
    ```powershell
    .venv\Scripts\python -m pytest && .venv\Scripts\python -m build

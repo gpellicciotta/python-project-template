@@ -12,7 +12,9 @@ A summarized overview of all changes, per version of this project.
 
 ---
 
-## v1.2.2-pre
+## v1.3.1-pre
+
+## v1.3.0 [2026-09-06]
 - Docs: Document optional scripts convention for non-packaged dev and maintenance tooling in devops.md.
 - Config: Pin ruff default lint rules explicitly in pyproject.toml.
 - DevEx: Reset pyproject.toml version to 0.0.1-pre when scaffolding new projects.
