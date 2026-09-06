@@ -17,7 +17,7 @@ An overview of all tasks and their planning.
 > - Metadata: `[label: value]` immediately following the task ID (e.g. `[owner: name]`, `[needs: Tnnnn]`, `[continue-after: YYYY-MM-DD]`, `[blocked: reason]`).
 > - Description: Natural-language sentence ($\le 20$ words once a task file exists; longer/multi-line permitted initially). Slugs are never used in TODO.md.
 
-**Next ID:** 0023
+**Next ID:** 0024
 
 ---
 
@@ -36,4 +36,5 @@ An overview of all tasks and their planning.
 - [ ] A0020 [owner: @gio] Modernize CI workflow with setup-python v5, explicit read permissions, and distribution artifact archiving.
 - [ ] A0021 [owner: @gio] Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
 - [ ] A0022 [owner: @gio] Standardize local build distribution output location between setup.ps1 and package build workflows.
+- [ ] A0023 Add scaffolded `scripts/bootstrap-dev-environment.py` and `scripts/deploy-to-production.py` per dev-guidelines' scripts-directory convention, as an example for projects derived from this template that deploy a service; may supersede/inform A0018.
 
