@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] A0008 Scaffold a tracked `tasks/` directory (placeholder file) so new projects start with the location coordinating-work-guidelines.md requires for full-task files.
+- [~] A0008 [owner: @gemini] Scaffold a tracked `tasks/` directory (placeholder file) so new projects start with the location coordinating-work-guidelines.md requires for full-task files.
 - [ ] A0009 Fix `scaffold.py`'s `_reset_pyproject_version` to reset to a `-pre` version (e.g. `0.0.1-pre`) so scaffolded projects start compliant with the versioning guideline instead of needing a later fix-up.
 - [ ] A0010 Standardize on setuptools as the build backend (already used by the template and mail-utils) and add an explicit `[tool.ruff.lint] select = ["E4", "E7", "E9", "F"]` to the template's pyproject.toml, pinning ruff's current default rule set; file a follow-up adhoc task in hinolugi-support.python's own TODO.md to migrate it from hatchling to setuptools for consistency.
 - [ ] A0011 Document an optional `scripts/` convention for non-packaged dev/maintenance tooling, as used in mail-utils, in `docs/devops.md`.
