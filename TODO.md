@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] T0013 Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
+- [~] T0013 [owner: @gemini] Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
 
 ---
 
