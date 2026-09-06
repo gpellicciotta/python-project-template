@@ -90,6 +90,9 @@ def test_create_scaffolds_renamed_project(tmp_path):
     assert (destination / "docs" / "requirements.md").is_file()
     assert (destination / "docs" / "devops.md").is_file()
     assert (destination / "docs" / "index.md").is_file()
+    assert (destination / "docs" / "specs" / ".gitkeep").is_file()
+    assert (destination / "docs" / "adrs" / ".gitkeep").is_file()
+    assert (destination / "docs" / "issues" / ".gitkeep").is_file()
     assert (destination / ".github" / "workflows" / "publish.yml").is_file()
     assert "Installing from a release" in readme
 

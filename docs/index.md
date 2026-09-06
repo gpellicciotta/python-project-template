@@ -15,6 +15,14 @@ Overview of all documentation and specifications in this project.
 
 ---
 
+## Specialized Documentation
+
+- [Specifications](specs/): Interface, format, and protocol specifications.
+- [Architecture Decision Records](adrs/): Architectural decision records explaining key choices.
+- [Issue Records](issues/): Root cause analysis and resolution records for complex bugs.
+
+---
+
 ## Guidelines
 
 This project follows the cross-project

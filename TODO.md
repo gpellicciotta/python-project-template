@@ -23,12 +23,11 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [~] A0007 [owner: @gemini] Scaffold `docs/specs/`, `docs/adrs/`, and `docs/issues/` placeholders and link them from `docs/index.md`; dev-guidelines mandates them but the template's docs/index.md doesn't mention any of the three.
 - [ ] A0008 Scaffold a tracked `tasks/` directory (placeholder file) so new projects start with the location coordinating-work-guidelines.md requires for full-task files.
 - [ ] A0009 Fix `scaffold.py`'s `_reset_pyproject_version` to reset to a `-pre` version (e.g. `0.0.1-pre`) so scaffolded projects start compliant with the versioning guideline instead of needing a later fix-up.
 - [ ] A0010 Standardize on setuptools as the build backend (already used by the template and mail-utils) and add an explicit `[tool.ruff.lint] select = ["E4", "E7", "E9", "F"]` to the template's pyproject.toml, pinning ruff's current default rule set; file a follow-up adhoc task in hinolugi-support.python's own TODO.md to migrate it from hatchling to setuptools for consistency.
 - [ ] A0011 Document an optional `scripts/` convention for non-packaged dev/maintenance tooling, as used in mail-utils, in `docs/devops.md`.
-- [ ] A0012 [needs: A0011] [needs: A0010] [needs: A0009] [needs: A0008] [needs: A0007] Make a new v1.3.0 release
+- [ ] A0012 [needs: A0011] [needs: A0010] [needs: A0009] [needs: A0008] Make a new v1.3.0 release
 - [ ] T0013 [needs: A0012] Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
 
 ---

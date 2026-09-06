@@ -25,6 +25,9 @@ python-template-project/
     index.md           # documentation index
     requirements.md    # high-level goals, functional & technical requirements
     devops.md          # environment prerequisites, build/test/deploy procedures
+    specs/             # interface, format, and protocol specifications
+    adrs/              # architectural decision records
+    issues/            # root cause analysis and resolution records
   .github/
     workflows/
       ci.yml           # editable install + ruff + pytest + build, on push/PR
