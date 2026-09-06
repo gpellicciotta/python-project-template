@@ -23,7 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [ ] A0010 Standardize on setuptools as the build backend (already used by the template and mail-utils) and add an explicit `[tool.ruff.lint] select = ["E4", "E7", "E9", "F"]` to the template's pyproject.toml, pinning ruff's current default rule set; file a follow-up adhoc task in hinolugi-support.python's own TODO.md to migrate it from hatchling to setuptools for consistency.
+- [~] A0010 [owner: @gemini] Standardize on setuptools as the build backend (already used by the template and mail-utils) and add an explicit `[tool.ruff.lint] select = ["E4", "E7", "E9", "F"]` to the template's pyproject.toml, pinning ruff's current default rule set; file a follow-up adhoc task in hinolugi-support.python's own TODO.md to migrate it from hatchling to setuptools for consistency.
 - [ ] A0011 Document an optional `scripts/` convention for non-packaged dev/maintenance tooling, as used in mail-utils, in `docs/devops.md`.
 - [ ] A0012 [needs: A0011] [needs: A0010] Make a new v1.3.0 release
 - [ ] T0013 [needs: A0012] Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
