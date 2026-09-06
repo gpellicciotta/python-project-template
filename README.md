@@ -16,6 +16,9 @@ python-template-project/
       core.py          # business logic
       cli.py           # entry point (registered in pyproject.toml's [project.scripts])
       scaffold.py      # `create` subcommand: copies + renames this template into a new project
+  scripts/
+    bootstrap-dev-environment.py  # one-shot bootstrap: git init, venv, editable install, lint, tests, build
+    _cli_common.py     # shared version/help boilerplate for scripts/
   tests/
     test_core.py
     test_cli.py
@@ -36,7 +39,6 @@ python-template-project/
   pyproject.toml       # project metadata, dependencies, dev extra, CLI entry point, ruff config
   .gitignore 
   .editorconfig        # indent/charset/line-length, mirrors the ruff config for non-Python files/editors
-  setup.ps1            # one-shot bootstrap: git init, venv, editable install, lint, tests, build
   CLAUDE.md
   CHANGELOG.md         # version history with status tags - top-level
   TODO.md              # milestone task index (Next Milestone, Backlog) - top-level
@@ -62,11 +64,11 @@ Alternatives:
 - [pytest — Good practices (tests outside application code)](https://docs.pytest.org/en/stable/goodpractices.html#tests-outside-application-code)
 - [The Hitchhiker's Guide to Python — Project structure](https://docs.python-guide.org/writing/structure/)
 
-## Quick Start (Windows PowerShell)
-Open PowerShell in the project root and run:
+## Quick Start (Windows/Linux/macOS)
+Open a terminal in the project root and run:
 
-```powershell
-. .\setup.ps1
+```bash
+python scripts/bootstrap-dev-environment.py
 ```
 
 This initializes a git repo (if one doesn't already exist), creates a virtual environment, installs the
@@ -97,7 +99,7 @@ myproject create <project-name> [-o <output-dir>]
 
 `create` scaffolds a new project as a copy of this template at `<output-dir>/<project-name>` (current directory
 if `-o` is omitted), automating the renames described below in **Starting a new project from this template**.
-Run it from an editable install of this template (i.e. after `. .\setup.ps1` or
+Run it from an editable install of this template (i.e. after `python scripts/bootstrap-dev-environment.py` or
 `pip install -e ".[dev]"` in this repo).
 
 ## Building the Packages
@@ -108,7 +110,7 @@ For building the source and binary (i.e. wheel) distribution packages:
 python -m build
 ```
 
-The built packages will be in the `dist/` directory — the same location `setup.ps1`'s build step uses.
+The built packages will be in the `dist/` directory — the same location `scripts/bootstrap-dev-environment.py`'s build step uses.
 
 ## Installation and Releases
 

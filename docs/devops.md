@@ -14,11 +14,11 @@ Practical guidance on development environment setup, testing, validation, builds
 
 ## Setup and Development Workflows
 
-### Initial Bootstrap (PowerShell)
+### Initial Bootstrap (Windows/Linux/macOS)
 To initialize git, create the virtual environment, install in editable mode with dev tools, lint, run tests, and build:
 
-```powershell
-. .\setup.ps1
+```bash
+python scripts/bootstrap-dev-environment.py
 ```
 
 ### Manual Setup
@@ -67,9 +67,10 @@ All active work follows the protocol defined in [Coordinating Work Guidelines](h
 
 ## Development and Maintenance Scripts
 
-An optional root `scripts/` directory houses non-packaged development and maintenance tooling.
-These standalone scripts remain separate from the installable package and automated test suites.
-Projects such as `mail-utils` use this convention for bootstrap scripts, roundtrip testing, and migrations.
+The root `scripts/` directory houses non-packaged development and maintenance tooling, including the
+`bootstrap-dev-environment.py` script used above. These standalone scripts remain separate from the
+installable package and automated test suites. Projects such as `mail-utils` use this convention for
+bootstrap scripts, roundtrip testing, and migrations.
 
 ### Purpose and Scope
 Use `scripts/` for operational tasks that support developers rather than packaged library users:
@@ -91,7 +92,7 @@ Follow standard project conventions when adding tools under `scripts/`:
 ### Execution
 Run scripts directly using the virtual environment interpreter:
 
-```powershell
+```bash
 python scripts/<script-name>.py --help
 ```
 
@@ -105,7 +106,7 @@ To build source distributions (`sdist`) and wheels (`bdist_wheel`):
 python -m build
 ```
 
-Built packages are written to `dist/` — `setup.ps1`'s build step uses the same location.
+Built packages are written to `dist/` — `scripts/bootstrap-dev-environment.py`'s build step uses the same location.
 
 ---
 

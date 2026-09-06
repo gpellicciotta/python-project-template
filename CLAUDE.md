@@ -11,8 +11,9 @@ change doesn't casually cross them.>
 
 ## Commands
 
-All commands use the project's venv (`.venv`, created via `python -m venv .venv` — or run `. .\setup.ps1` for a
-one-shot bootstrap: creates the venv, installs editable + dev extras, runs tests, builds sdist/wheel).
+All commands use the project's venv (`.venv`, created via `python -m venv .venv` — or run
+`python scripts/bootstrap-dev-environment.py` for a one-shot, cross-platform bootstrap: creates the venv,
+installs editable + dev extras, runs tests, builds sdist/wheel).
 
 - Install in editable mode, with the `dev` extra (pytest, ruff, build):
   `.venv\Scripts\pip install -e ".[dev]"`
@@ -41,8 +42,9 @@ This repository and all projects scaffolded from this template follow the cross-
   design for hypothetical future requirements.
 - Minimize third-party dependencies. Reach for the standard library first; add a dependency only when it earns
   its ongoing maintenance cost.
-- Make it easy to get started: a clone + `. .\setup.ps1` (or the three commands under Commands above) should be
-  enough to get a working venv, passing tests, and a build — no undocumented setup steps.
+- Make it easy to get started: a clone + `python scripts/bootstrap-dev-environment.py` (or the three commands
+  under Commands above) should be enough to get a working venv, passing tests, and a build — no undocumented
+  setup steps.
 - Use the same tools and techniques the rest of the Python ecosystem is using (src-layout, `pyproject.toml`,
   pytest, ruff, GitHub Actions) unless there's a concrete reason to deviate — and if you deviate, say why in
   this file rather than leaving it implicit.
@@ -95,8 +97,8 @@ Key conventions:
   bug, not a documentation nice-to-have.
 - Style guide: spaces for indentation (never tabs), 4-space indent width, 132-character line length, UTF-8
   everywhere. Enforced by `.editorconfig` (editor-level) and `ruff` (`pyproject.toml`'s `[tool.ruff]`, run via
-  `ruff check .` / `ruff format --check .`, wired into `setup.ps1` and CI) — don't let either drift from these
-  numbers.
+  `ruff check .` / `ruff format --check .`, wired into `scripts/bootstrap-dev-environment.py` and CI) — don't
+  let either drift from these numbers.
 - The package's `__version__` (`src/myproject/__init__.py`) is read from installed package metadata
   (`importlib.metadata.version(...)`) rather than hardcoded, so `pyproject.toml`'s `version` stays the single
   source of truth.
