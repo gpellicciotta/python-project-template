@@ -4,7 +4,7 @@ Practical guidance on development environment setup, testing, validation, builds
 
 ---
 
-## 1. Prerequisites and Environment
+## Prerequisites and Environment
 
 - **Python**: Python 3.10+
 - **Git**: Git 2.30+ supporting worktrees (`git worktree`)
@@ -12,16 +12,16 @@ Practical guidance on development environment setup, testing, validation, builds
 
 ---
 
-## 2. Setup and Development Workflows
+## Setup and Development Workflows
 
-### 2.1. One-Shot Bootstrap (PowerShell)
+### Initial Bootstrap (PowerShell)
 To initialize git, create the virtual environment, install in editable mode with dev tools, lint, run tests, and build:
 
 ```powershell
 . .\setup.ps1
 ```
 
-### 2.2. Manual Setup
+### Manual Setup
 ```bash
 # Create and activate virtual environment
 python -m venv .venv
@@ -36,7 +36,7 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-### 2.3. Task Coordination Protocol
+### Task Coordination Protocol
 All active work follows the protocol defined in [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md):
 1. **Claim**: Fetch mainline, update `TODO.md` with `@owner` and `[~]`, commit, and push immediately (first fast-forward push wins).
 2. **Isolate** (full tasks `Tnnnn` only): Create a worktree at `./work/Tnnnn-slug` on branch `task/Tnnnn-slug` with a task file at `tasks/Tnnnn-slug.md`. Adhoc tasks (`Annnn`) skip this and work directly in the primary checkout.
@@ -46,14 +46,14 @@ All active work follows the protocol defined in [Coordinating Work Guidelines](h
 
 ---
 
-## 3. Testing and Code Quality
+## Testing and Code Quality
 
-### 3.1. Running Tests
+### Running Tests
 ```bash
 .venv\Scripts\python -m pytest
 ```
 
-### 3.2. Linting and Formatting
+### Linting and Formatting
 ```bash
 .venv\Scripts\ruff check .
 .venv\Scripts\ruff format --check .
@@ -65,7 +65,7 @@ All active work follows the protocol defined in [Coordinating Work Guidelines](h
 
 ---
 
-## 4. Build and Distribution
+## Build and Distribution
 
 To build source distributions (`sdist`) and wheels (`bdist_wheel`):
 
@@ -77,7 +77,25 @@ Built packages are written to `dist/` (or `bin/distributions/` if using `setup.p
 
 ---
 
-## 5. Continuous Integration
+## Release Process
+
+Ongoing work accumulates under the top `CHANGELOG.md` heading while it carries a `-pre` SemVer suffix (e.g.
+`## v1.2.2-pre`), which must always match `version` in `pyproject.toml` (the single source of truth) exactly,
+`-pre` included.
+
+1. Confirm the top `CHANGELOG.md` heading's version and `pyproject.toml`'s `version` already agree.
+2. Freeze: replace the heading's `-pre` suffix with `[{{date}}]`, and drop `-pre` from `pyproject.toml`'s
+   `version` so both again match exactly. In the same commit, add the next patch version's `## vX.Y.Z-pre`
+   heading above it and bump `pyproject.toml`'s `version` to match.
+3. Perform a clean verification build:
+   ```powershell
+   .venv\Scripts\python -m pytest && .venv\Scripts\python -m build
+   ```
+4. Commit the changes and tag the release commit.
+
+---
+
+## Continuous Integration
 
 The GitHub Actions workflow in `.github/workflows/ci.yml` runs on every push and pull request to validate:
 - Python environment setup.

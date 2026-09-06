@@ -4,7 +4,7 @@ Functional and technical requirements for the `python-project-template` reposito
 
 ---
 
-## 1. High-Level Goals
+## High-Level Goals
 
 - Provide a clean, modern template to start Python projects quickly using the standard `src/` layout.
 - Include out-of-the-box support for testing (`pytest`), linting and formatting (`ruff`), packaging (`build`/`wheel`), and CI (`GitHub Actions`).
@@ -13,9 +13,9 @@ Functional and technical requirements for the `python-project-template` reposito
 
 ---
 
-## 2. Functional Requirements
+## Functional Requirements
 
-### 2.1. Template Structure & Scaffolding
+### Template Structure and Scaffolding
 - Support the standard `src/{{package_name}}/` layout to avoid import conflicts during testing.
 - Include a built-in `create` subcommand (`myproject create <project-name> [-o <output-dir>]`) that:
   - Validates and derives valid Python package names from project slugs.
@@ -24,7 +24,7 @@ Functional and technical requirements for the `python-project-template` reposito
   - Initializes fresh `CHANGELOG.md` and `TODO.md` files and resets version to `0.0.1` in `pyproject.toml`.
   - Refuses to overwrite existing target directories.
 
-### 2.2. Command Line Interface (CLI)
+### Command Line Interface (CLI)
 - Provide an action-oriented, subcommand-based CLI:
   - `myproject help` / `-h` / `--help`: displays standardized multi-line help with usage, subcommands, options, and exit codes (supports `--verbose` for detailed usage).
   - `myproject version` / `--version`: outputs `{name} v{version} - {copyright}` and exits with code 0.
@@ -37,7 +37,7 @@ Functional and technical requirements for the `python-project-template` reposito
 
 ---
 
-## 3. Technical Requirements
+## Technical Requirements
 
 - **Python Version**: Python >=3.10.
 - **Packaging**: Standard `pyproject.toml` with `setuptools.build_meta` backend.

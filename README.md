@@ -19,6 +19,8 @@ python-template-project/
   tests/
     test_core.py
     test_cli.py
+  tasks/
+    Tnnnn-slug.md      # full task tracking files (retained upon completion)
   docs/
     index.md           # documentation index
     requirements.md    # high-level goals, functional & technical requirements
@@ -49,12 +51,12 @@ Alternatives:
 - App-specific layouts: can vary depending on project type (CLI, web app, library).
 
 ### Useful Resources
-- Development Guidelines: https://github.com/gpellicciotta/dev-guidelines
-- Python Packaging User Guide — Packaging Projects: https://packaging.python.org/en/latest/tutorials/packaging-projects/
-- PyPA sampleproject (src-layout example): https://github.com/pypa/sampleproject
-- Real Python — Python application layouts: https://realpython.com/python-application-layouts/
-- pytest — Good practices (tests outside application code): https://docs.pytest.org/en/stable/goodpractices.html#tests-outside-application-code
-- The Hitchhiker's Guide to Python — Project structure: https://docs.python-guide.org/writing/structure/
+- [Development Guidelines](https://github.com/gpellicciotta/dev-guidelines)
+- [Python Packaging User Guide — Packaging Projects](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
+- [PyPA sampleproject (src-layout example)](https://github.com/pypa/sampleproject)
+- [Real Python — Python application layouts](https://realpython.com/python-application-layouts/)
+- [pytest — Good practices (tests outside application code)](https://docs.pytest.org/en/stable/goodpractices.html#tests-outside-application-code)
+- [The Hitchhiker's Guide to Python — Project structure](https://docs.python-guide.org/writing/structure/)
 
 ## Quick Start (Windows PowerShell)
 Open PowerShell in the project root and run:

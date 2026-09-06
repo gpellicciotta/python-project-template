@@ -26,24 +26,23 @@ File each finding as a separate backlog item for @gio to review.
 
 ## Execution Log
 
-- [2026-09-06] **[Read]** Compared directory layouts, CI workflows, pyproject.toml, .gitignore, and
-  README/CHANGELOG conventions across all three projects.
-  - hinolugi-support.python ships `logging.py` and a `publish.yml` release workflow; template has neither.
-  - Both downstream projects populate `tasks/`; the template's `tasks/` dir isn't tracked at all.
-  - Neither downstream project's `docs/` scaffolds the `specs/`/`adrs/`/`issues/` subdirectories that
-    dev-guidelines mandates.
-  - `scaffold.py` resets `pyproject.toml`'s version to `"0.0.1"` (no `-pre`), and mail-utils still carries the
-    superseded `[in development]` CHANGELOG tag instead of the current `-pre` heading convention.
-  - hinolugi-support.python uses hatchling + a narrow `[tool.ruff.lint] select` list; template and mail-utils
-    use setuptools with ruff defaults.
-  - mail-utils has a `scripts/` dir for non-packaged dev/maintenance tooling with no equivalent template
-    convention.
-- [2026-09-06] **[Decide]** Chose 7 generic topics (logging module, release workflow, docs subdirectories,
-  tasks/ scaffold, `-pre` version fix, build-backend/lint decision, scripts/ convention). Excluded mail-utils'
-  Gmail/PST-specific modules and hinolugi's `transport.py` (an HTTP client, not template-generic).
-- [2026-09-06] **[Doc]** Filed A0005-A0011 in TODO.md's Backlog, each `[owner: @gio]`, pending his review before
-  any implementation.
-- [2026-09-06] **[Verify]** Ran `pytest -q` in the worktree (no source changes made); suite passes.
-- [2026-09-06] **[Complete]** Review finished; findings filed as seven backlog TODOs for @gio, no source
-  changes needed in this task. CHANGELOG.md left untouched — backlog/administrative grooming is explicitly
-  excluded from release notes.
+- [2026-09-06] **[Read]**
+  Compared directory layouts, CI workflows, and conventions across all three projects.
+  - hinolugi-support ships `logging.py` and `publish.yml`; template has neither.
+  - Both downstream projects populate `tasks/`; template does not track `tasks/`.
+  - Neither project scaffolds `specs/`, `adrs/`, or `issues/` directories.
+  - Downstream projects show versioning differences against current `-pre` guidelines.
+  - hinolugi-support uses hatchling with custom ruff rules; template uses setuptools.
+  - mail-utils has a `scripts/` directory for non-packaged dev tooling.
+
+- [2026-09-06] **[Decide]**
+  Selected 7 generic topics and excluded project-specific modules from the template scope.
+
+- [2026-09-06] **[Doc]**
+  Filed A0005-A0011 in `TODO.md` Backlog, owned by @gio, pending review.
+
+- [2026-09-06] **[Verify]**
+  Ran pytest in the worktree without source changes; all tests passed.
+
+- [2026-09-06] **[Complete]**
+  Filed seven backlog tasks for review; no source or changelog changes needed.

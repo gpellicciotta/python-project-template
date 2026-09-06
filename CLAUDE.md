@@ -14,8 +14,9 @@ change doesn't casually cross them.>
 All commands use the project's venv (`.venv`, created via `python -m venv .venv` — or run `. .\setup.ps1` for a
 one-shot bootstrap: creates the venv, installs editable + dev extras, runs tests, builds sdist/wheel).
 
-- Install in editable mode, with the `dev` extra (pytest): `.venv\Scripts\pip install -e ".[dev]"`
-  (drop `[dev]` if you only need to run the app, not the tests)
+- Install in editable mode, with the `dev` extra (pytest, ruff, build):
+  `.venv\Scripts\pip install -e ".[dev]"`
+- Lint: `.venv\Scripts\ruff check .` / `.venv\Scripts\ruff format --check .`
 - Run the test suite: `.venv\Scripts\python -m pytest`
 - <Add the project's actual run command(s) here, e.g. `python -m mypackage.cli <command>`, or
   `mypackage <command>` once installed — see `pyproject.toml`'s `[project.scripts]`.>
@@ -54,10 +55,10 @@ This repository and all projects scaffolded from this template follow the cross-
 - `CHANGELOG.md` (top-level) tracks version history: active in-development versions use a `-pre` suffix
   (`vX.Y.Z-pre`), replaced on release with a status tag (`[YYYY-MM-DD]`, `[released: YYYY-MM-DD]`, `[broken]`).
   Bump `pyproject.toml`'s `version` for every user-facing change and add a matching entry to `CHANGELOG.md`.
-- `TODO.md` (top-level) is the shared task index for planned, active, and blocked work, tracked under a
-  `**Next ID:**` counter and milestone sections (`## Next Milestone`, `## Backlog`) with task status markers
-  (`[ ]`, `[~]`, `[!]`, `[?]`). Completed tasks are removed immediately from `TODO.md` upon completion
-  (version control is the permanent record).
+- `TODO.md` (top-level) is the shared task index for planned, active, and blocked work using
+  milestone sections (`## Next Milestone`, `## Backlog`) and task status markers
+  (`[ ]`, `[~]`, `[!]`, `[?]`). Completed tasks are removed immediately from `TODO.md`
+  (version control is the permanent record); their task file under `tasks/` is retained with `status: completed`.
 - Mandatory docs: `docs/index.md`, `docs/requirements.md`, and `docs/devops.md`. Other documentation
   (design notes, ADRs, detailed specs) also lives under `docs/`.
 - Keep `README.md`'s setup/usage/layout sections in sync with the code as it evolves — treat drift there as a

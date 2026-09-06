@@ -17,5 +17,11 @@ Overview of all documentation and specifications in this project.
 
 ## Guidelines
 
-- [Development Guidelines](https://github.com/gpellicciotta/dev-guidelines): Universal cross-project development standards, task coordination protocol, and language conventions.
+This project follows the cross-project
+[Development Guidelines](https://github.com/gpellicciotta/dev-guidelines), in particular its
+[general guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/general-guidelines.md),
+[Python guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/python-guidelines.md),
+[coordinating work guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md),
+and
+[Markdown guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/markdown-guidelines.md).
 

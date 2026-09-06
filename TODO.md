@@ -1,13 +1,28 @@
 # TODO
 
-Shared task index for planned, active, and blocked work.
-See [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md) for protocol details.
+An overview of all tasks and their planning.
+
+> Tasks are listed by milestone.  
+> See [coordinating work guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md) for the full coordination protocol.
+
+> Notation:
+> - ID: 
+>   - `Tnnnn`: full task with `tasks/` file and branch/worktree
+>   - `Annnn`: adhoc task with TODO.md line only
+> - Status: 
+>   - `[ ]` available
+>   - `[~]` active / in progress
+>   - `[!]` blocked 
+>   - `[?]` needs-review
+> - Metadata: `[label: value]` immediately following the task ID (e.g. `[owner: name]`, `[needs: Tnnnn]`, `[continue-after: YYYY-MM-DD]`, `[blocked: reason]`).
+> - Description: Natural-language sentence ($\le 20$ words once a task file exists; longer/multi-line permitted initially). Slugs are never used in TODO.md.
 
 **Next ID:** 0016
 
+---
+
 ## Next Milestone
 
-- [~] A0015 [owner: @gemini] Update all task and documentation files to be in line with the latest guidelines. Ensure the project as a whole complies with the guidelines and is maximally in line with hinolugi-support.python.
 - [ ] A0005 Wire CLAUDE.md's Logging section usage to hinolugi-support.python's `hinolugi_support.logging.CliLogger`/`LogLevel` (added by A0014) instead of reimplementing a local starter module.
 - [ ] A0006 Add a release/publish GitHub Actions workflow (trigger on `release: published`, build sdist/wheel, upload to the release) plus a README "installing from a release" section, mirroring hinolugi-support.python's `publish.yml`.
 - [ ] A0007 Scaffold `docs/specs/`, `docs/adrs/`, and `docs/issues/` placeholders and link them from `docs/index.md`; dev-guidelines mandates them but the template's docs/index.md doesn't mention any of the three.
@@ -15,9 +30,12 @@ See [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelin
 - [ ] A0009 Fix `scaffold.py`'s `_reset_pyproject_version` to reset to a `-pre` version (e.g. `0.0.1-pre`) so scaffolded projects start compliant with the versioning guideline instead of needing a later fix-up.
 - [ ] A0010 Standardize on setuptools as the build backend (already used by the template and mail-utils) and add an explicit `[tool.ruff.lint] select = ["E4", "E7", "E9", "F"]` to the template's pyproject.toml, pinning ruff's current default rule set; file a follow-up adhoc task in hinolugi-support.python's own TODO.md to migrate it from hatchling to setuptools for consistency.
 - [ ] A0011 Document an optional `scripts/` convention for non-packaged dev/maintenance tooling, as used in mail-utils, in `docs/devops.md`.
-- [ ] A0012 [needs: A0011 A0010 A0009 A0008 A0007 A0006 A0005] Make a new v1.3.0 release
+- [ ] A0012 [needs: A0011] [needs: A0010] [needs: A0009] [needs: A0008] [needs: A0007] [needs: A0006] [needs: A0005] Make a new v1.3.0 release
 - [ ] T0013 [needs: A0012] Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
+
+---
 
 ## Backlog
 
 *(Currently no tasks)*
+
