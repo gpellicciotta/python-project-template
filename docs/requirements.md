@@ -47,7 +47,7 @@ Functional and technical requirements for the `python-project-template` reposito
 - **Python Version**: Python >=3.10.
 - **Packaging**: Standard `pyproject.toml` with `setuptools.build_meta` backend.
 - **Code Quality**:
-  - Code formatted and linted with `ruff` (132-character line length).
+  - Code formatted and linted with `ruff` (132-character line length, rules pinned to `E4`, `E7`, `E9`, `F`).
   - Editor settings configured via `.editorconfig` (4 spaces, UTF-8, LF line endings).
 - **Testing**: Test suite run via `pytest` covering core logic, CLI subcommands, options, exit codes, and scaffolding behavior.
 - **Portability**: Cross-platform support for Windows, Linux, and macOS.

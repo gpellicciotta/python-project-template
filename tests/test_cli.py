@@ -69,6 +69,8 @@ def test_create_scaffolds_renamed_project(tmp_path):
     assert 'name = "sample-app"' in pyproject
     assert 'version = "0.0.1-pre"' in pyproject
     assert 'sample_app = "sample_app.cli:main"' in pyproject
+    assert "[tool.ruff.lint]" in pyproject
+    assert 'select = ["E4", "E7", "E9", "F"]' in pyproject
 
     readme = (destination / "README.md").read_text(encoding="utf-8")
     assert "Sample App" in readme
