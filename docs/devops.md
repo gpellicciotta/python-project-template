@@ -92,6 +92,7 @@ Ongoing work accumulates under the top `CHANGELOG.md` heading while it carries a
    .venv\Scripts\python -m pytest && .venv\Scripts\python -m build
    ```
 4. Commit the changes and tag the release commit.
+5. Publish a GitHub Release for the tag; `.github/workflows/publish.yml` builds distribution packages and attaches them to the release.
 
 ---
 
@@ -103,3 +104,5 @@ The GitHub Actions workflow in `.github/workflows/ci.yml` runs on every push and
 - Code linting and formatting via `ruff`.
 - Automated test suite execution via `pytest`.
 - Package build via `build`.
+
+When a release is published on GitHub, `.github/workflows/publish.yml` triggers to build sdist and wheel packages and attach them as downloadable release assets.

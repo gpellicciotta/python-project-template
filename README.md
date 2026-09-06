@@ -28,6 +28,7 @@ python-template-project/
   .github/
     workflows/
       ci.yml           # editable install + ruff + pytest + build, on push/PR
+      publish.yml      # build and attach sdist/wheel to GitHub releases
   LICENSE.md           # MIT license
   pyproject.toml       # project metadata, dependencies, dev extra, CLI entry point, ruff config
   .gitignore 
@@ -106,6 +107,33 @@ python -m build
 
 The built packages will be in the `dist/` directory (or wherever `-o` points, e.g. `setup.ps1` uses
 `bin/distributions/`).
+
+## Installation and Releases
+
+When a release is published on GitHub, `.github/workflows/publish.yml` builds source and wheel packages,
+attaching them as downloadable release assets.
+
+### Installing from a release
+
+Install directly from a published GitHub release wheel asset:
+
+```bash
+python -m pip install https://github.com/gpellicciotta/python-template-project/releases/download/vX.Y.Z/template-project-X.Y.Z-py3-none-any.whl
+```
+
+Or install directly from the Git release tag:
+
+```bash
+python -m pip install git+https://github.com/gpellicciotta/python-template-project.git@vX.Y.Z
+```
+
+Or declare it in downstream `pyproject.toml` dependencies:
+
+```toml
+dependencies = [
+    "template-project @ git+https://github.com/gpellicciotta/python-template-project.git@vX.Y.Z",
+]
+```
 
 ## Starting a new project from this template
 
