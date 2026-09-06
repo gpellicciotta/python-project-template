@@ -23,7 +23,6 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [~] A0016 [owner: @claude] Add source directory to pytest pythonpath so tests run against source without prior editable installation.
 - [ ] A0017 Declare license file and repository URLs in pyproject.toml and update project scaffolding to rewrite them.
 - [ ] A0018 Provide a cross-platform Python bootstrap script to replace setup.ps1
 - [ ] A0019 Refactor sample CLI to use hinolugi-support CLI helpers instead of duplicating custom argparse and help boilerplate.
