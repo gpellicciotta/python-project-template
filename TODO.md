@@ -23,8 +23,7 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [~] A0011 [owner: @gemini] Document an optional `scripts/` convention for non-packaged dev/maintenance tooling, as used in mail-utils, in `docs/devops.md`.
-- [ ] A0012 [needs: A0011] Make a new v1.3.0 release
+- [ ] A0012 Make a new v1.3.0 release
 - [ ] T0013 [needs: A0012] Review the Python projects hinolugi-support.python and mail-utils and document structural differences from this project: look at it as if these projects should have been started from this project, yet keeping in mind that this is a generic template project: we don't want to include things that are only relevant for 1 particular project. For each major topic, make a separate TODO in the backlog and mark it for review by @gio.
 
 ---

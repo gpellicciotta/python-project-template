@@ -65,6 +65,38 @@ All active work follows the protocol defined in [Coordinating Work Guidelines](h
 
 ---
 
+## Development and Maintenance Scripts
+
+An optional root `scripts/` directory houses non-packaged development and maintenance tooling.
+These standalone scripts remain separate from the installable package and automated test suites.
+Projects such as `mail-utils` use this convention for bootstrap scripts, roundtrip testing, and migrations.
+
+### Purpose and Scope
+Use `scripts/` for operational tasks that support developers rather than packaged library users:
+- Environment bootstrapping and dev setup automation.
+- Specialized test harnesses and roundtrip verification suites.
+- Adhoc data migrations, database maintenance, and repair utilities.
+- Test fixture generation and synthetic benchmark data creation.
+- Shared internal CLI utilities supporting standalone scripts.
+
+### Script Conventions
+Follow standard project conventions when adding tools under `scripts/`:
+- Keep scripts standalone and executable directly with Python.
+- Structure command-line interfaces around action-oriented subcommands.
+- Standardize version and help output per cross-project [CLI guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/general-guidelines.md#cli).
+- Return explicit exit codes indicating success or failure.
+- Prefix non-executable shared modules with an underscore, such as `_cli_common.py`.
+- Lint and format scripts with `ruff` alongside application code.
+
+### Execution
+Run scripts directly using the virtual environment interpreter:
+
+```powershell
+python scripts/<script-name>.py --help
+```
+
+---
+
 ## Build and Distribution
 
 To build source distributions (`sdist`) and wheels (`bdist_wheel`):
