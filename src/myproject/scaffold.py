@@ -122,13 +122,24 @@ def _reset_pyproject_version(pyproject_path: Path) -> None:
     pyproject_path.write_text(new_text, encoding="utf-8")
 
 
+def _reset_tasks_dir(tasks_dir: Path) -> None:
+    tasks_dir.mkdir(parents=True, exist_ok=True)
+    for path in tasks_dir.iterdir():
+        if path.name != ".gitkeep":
+            if path.is_file():
+                path.unlink()
+            elif path.is_dir():
+                shutil.rmtree(path)
+    (tasks_dir / ".gitkeep").write_text("\n", encoding="utf-8")
+
+
 def create_project(project_name: str, output_dir: str = ".", template_root: Path | None = None) -> Path:
     """Create a new project at `output_dir/project_name`, as a renamed copy of this template.
 
     Automates the manual steps documented in this template's README under "Starting a new project
     from this template": copy the tree, rename the `myproject` package, replace the `template-project` /
-    `python-template-project` name placeholders throughout, and reset `CHANGELOG.md`, `TODO.md`, and
-    `pyproject.toml`'s `version` — the new project starts its own history rather than inheriting the
+    `python-template-project` name placeholders throughout, and reset `CHANGELOG.md`, `TODO.md`, `tasks/`,
+    and `pyproject.toml`'s `version` — the new project starts its own history rather than inheriting the
     template's.
     """
     if template_root is None:
@@ -159,6 +170,7 @@ def create_project(project_name: str, output_dir: str = ".", template_root: Path
 
     (destination / "CHANGELOG.md").write_text(_fresh_changelog_md(title), encoding="utf-8")
     (destination / "TODO.md").write_text(_fresh_todo_md(), encoding="utf-8")
+    _reset_tasks_dir(destination / "tasks")
     _reset_pyproject_version(destination / "pyproject.toml")
 
     return destination

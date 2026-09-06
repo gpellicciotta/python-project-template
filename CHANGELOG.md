@@ -13,6 +13,7 @@ A summarized overview of all changes, per version of this project.
 ---
 
 ## v1.2.2-pre
+- DevEx: Scaffold a tracked tasks/ directory with a placeholder file for new projects.
 - Docs: Scaffold docs/specs/, docs/adrs/, and docs/issues/ placeholder directories and link them from docs/index.md.
 - Build: Add release publish workflow and document installing packages from GitHub releases.
 - Docs: Wire CLAUDE.md logging guidance to hinolugi-support's CliLogger and LogLevel instead of local modules.
