@@ -22,5 +22,9 @@ bin/
 .vscode/
 .idea/
 
-# Parallel task worktrees
-work/
+# Task worktrees (coordinating-work-guidelines.md)
+work/
+
+# Log files
+logs/
+**/*.log
