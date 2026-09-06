@@ -22,9 +22,12 @@ _EXCLUDED_NAMES = {
     "dist",
     ".pytest_cache",
     ".ruff_cache",
+    ".mypy_cache",
+    "htmlcov",
     ".idea",
     ".vscode",
     "work",
+    "logs",
 }
 
 
@@ -53,7 +56,7 @@ def _to_package_name(project_name: str) -> str:
 
 
 def _ignore(_dir: str, names: list[str]) -> set[str]:
-    return {name for name in names if name in _EXCLUDED_NAMES or name.endswith(".egg-info")}
+    return {name for name in names if name in _EXCLUDED_NAMES or name.endswith(".egg-info") or name.startswith(".coverage")}
 
 
 def _rewrite_text_files(root: Path, replacements: list[tuple[str, str]]) -> None:
