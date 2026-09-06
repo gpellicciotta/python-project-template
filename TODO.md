@@ -23,18 +23,17 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-*(Currently no tasks)*
+- [ ] A0022 Standardize local build distribution output location between setup.ps1 and package build workflows.
+- [ ] A0016 Add source directory to pytest pythonpath so tests run against source without prior editable installation.
+- [ ] A0017 Declare license file and repository URLs in pyproject.toml and update project scaffolding to rewrite them.
+- [ ] A0018 Provide a cross-platform Python bootstrap script to replace setup.ps1
+- [ ] A0019 Refactor sample CLI to use hinolugi-support CLI helpers instead of duplicating custom argparse and help boilerplate.
+- [ ] A0020 Modernize CI workflow with setup-python v5, explicit read permissions, and distribution artifact archiving.
+- [ ] A0021 Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
 
 ---
 
 ## Backlog
 
-- [ ] A0016 [owner: @gio] Add source directory to pytest pythonpath so tests run against source without prior editable installation.
-- [ ] A0017 [owner: @gio] Declare license file and repository URLs in pyproject.toml and update project scaffolding to rewrite them.
-- [ ] A0018 [owner: @gio] Provide a cross-platform Python bootstrap script alongside setup.ps1 to support non-Windows environments out of the box.
-- [ ] A0019 [owner: @gio] Refactor sample CLI to use hinolugi-support CLI helpers instead of duplicating custom argparse and help boilerplate.
-- [ ] A0020 [owner: @gio] Modernize CI workflow with setup-python v5, explicit read permissions, and distribution artifact archiving.
-- [ ] A0021 [owner: @gio] Add tool caches and coverage files to .gitignore and exclude logs and tool caches during scaffolding.
-- [ ] A0022 [owner: @gio] Standardize local build distribution output location between setup.ps1 and package build workflows.
 - [ ] A0023 Add scaffolded `scripts/bootstrap-dev-environment.py` and `scripts/deploy-to-production.py` per dev-guidelines' scripts-directory convention, as an example for projects derived from this template that deploy a service; may supersede/inform A0018.
 
