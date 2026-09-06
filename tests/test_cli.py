@@ -67,7 +67,7 @@ def test_create_scaffolds_renamed_project(tmp_path):
 
     pyproject = (destination / "pyproject.toml").read_text(encoding="utf-8")
     assert 'name = "sample-app"' in pyproject
-    assert 'version = "0.0.1"' in pyproject
+    assert 'version = "0.0.1-pre"' in pyproject
     assert 'sample_app = "sample_app.cli:main"' in pyproject
 
     readme = (destination / "README.md").read_text(encoding="utf-8")

@@ -21,7 +21,7 @@ Functional and technical requirements for the `python-project-template` reposito
   - Validates and derives valid Python package names from project slugs.
   - Copies template files while excluding cache/build artifacts.
   - Rewrites placeholders (`template-project`, `python-template-project`, `myproject`, title) across documentation and configuration.
-  - Initializes fresh `CHANGELOG.md` and `TODO.md` files and resets version to `0.0.1` in `pyproject.toml`.
+  - Initializes fresh `CHANGELOG.md` and `TODO.md` files and resets version to `0.0.1-pre` in `pyproject.toml`.
   - Refuses to overwrite existing target directories.
 
 ### Command Line Interface (CLI)

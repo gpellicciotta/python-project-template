@@ -118,7 +118,7 @@ def _fresh_todo_md() -> str:
 
 def _reset_pyproject_version(pyproject_path: Path) -> None:
     text = pyproject_path.read_text(encoding="utf-8")
-    new_text = re.sub(r'(?m)^version = ".*"$', 'version = "0.0.1"', text, count=1)
+    new_text = re.sub(r'(?m)^version = ".*"$', 'version = "0.0.1-pre"', text, count=1)
     pyproject_path.write_text(new_text, encoding="utf-8")
 
 
