@@ -3,12 +3,12 @@
 Shared task index for planned, active, and blocked work.
 See [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md) for protocol details.
 
-**Next ID:** 0015
+**Next ID:** 0016
 
 ## Next Milestone
 
-- [~] A0014 [owner: @gemini] Upgrade to using the latest released hinolugi-support.python as we want derived projects also to do that from the beginning
-- [ ] A0005 [needs: A0014] Wire CLAUDE.md's Logging section usage to hinolugi-support.python's `hinolugi_support.logging.CliLogger`/`LogLevel` (added by A0014) instead of reimplementing a local starter module.
+- [ ] A0015 Update all task and documentation files to be in line with the latest guidelines. Ensure the project as a whole complies with the guidelines and is maximally in line with hinolugi-support.python.
+- [ ] A0005 Wire CLAUDE.md's Logging section usage to hinolugi-support.python's `hinolugi_support.logging.CliLogger`/`LogLevel` (added by A0014) instead of reimplementing a local starter module.
 - [ ] A0006 Add a release/publish GitHub Actions workflow (trigger on `release: published`, build sdist/wheel, upload to the release) plus a README "installing from a release" section, mirroring hinolugi-support.python's `publish.yml`.
 - [ ] A0007 Scaffold `docs/specs/`, `docs/adrs/`, and `docs/issues/` placeholders and link them from `docs/index.md`; dev-guidelines mandates them but the template's docs/index.md doesn't mention any of the three.
 - [ ] A0008 Scaffold a tracked `tasks/` directory (placeholder file) so new projects start with the location coordinating-work-guidelines.md requires for full-task files.

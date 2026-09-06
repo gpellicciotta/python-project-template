@@ -12,6 +12,10 @@ A summarized overview of all changes, per version of this project.
 
 ---
 
+## v1.2.2-pre
+- DevEx: Add hinolugi-support dependency so derived projects inherit shared support utilities.
+- DevEx: Add all log files to .gitignore
+
 ## v1.2.1 [2026-09-06]
 - Docs: Align TODO.md, CHANGELOG.md, and CLAUDE.md with the `-pre` versioning and Backlog heading conventions.
 - DevEx: Document the adhoc-task and review-tier workflow in devops.md, and fix scaffolded projects' TODO.md/CHANGELOG.md to match.
