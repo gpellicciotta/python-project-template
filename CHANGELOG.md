@@ -5,12 +5,16 @@ A summarized overview of all changes, per version of this project.
 > Entries will be added in reverse chronological order, so with the most recent at the top.
 > 
 > Status codes used are:
-> - `[in development]` - actively being developed
+> - `vX.Y.Z-pre` - actively being developed (suffix on the heading itself, not a bracket tag)
 > - `[{{date}}]` - frozen/finalized on {{date}}
 > - `[released: {{date}}]` - released to package manager or production on {{date}}
 > - `[broken]` - considered broken and not be used
 
 ---
+
+## v1.2.1 [2026-09-06]
+- Docs: Align TODO.md, CHANGELOG.md, and CLAUDE.md with the `-pre` versioning and Backlog heading conventions.
+- DevEx: Document the adhoc-task and review-tier workflow in devops.md, and fix scaffolded projects' TODO.md/CHANGELOG.md to match.
 
 ## v1.2.0 [2026-08-24]
 - DevEx: Scope pytest to `tests/` so it no longer collides with sibling task worktrees under `work/`.

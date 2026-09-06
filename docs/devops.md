@@ -38,10 +38,11 @@ pip install -e ".[dev]"
 
 ### 2.3. Task Coordination Protocol
 All active work follows the protocol defined in [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md):
-1. **Claim**: Update `TODO.md` with `@owner` and `[~]`, commit, and push.
-2. **Worktree**: Create an isolated worktree at `./work/Tnnnn-slug` on branch `task/Tnnnn-slug`.
-3. **Execute**: Develop and document progress inside the worktree in `tasks/Tnnnn-slug.md`.
-4. **Finalize**: Run validation checks, complete the task file, merge/integrate, clean up the worktree, and remove the task entry.
+1. **Claim**: Fetch mainline, update `TODO.md` with `@owner` and `[~]`, commit, and push immediately (first fast-forward push wins).
+2. **Isolate** (full tasks `Tnnnn` only): Create a worktree at `./work/Tnnnn-slug` on branch `task/Tnnnn-slug` with a task file at `tasks/Tnnnn-slug.md`. Adhoc tasks (`Annnn`) skip this and work directly in the primary checkout.
+3. **Execute**: Develop and, for full tasks, document progress in the task file's Execution Log.
+4. **Finalize**: Run validation checks, update `CHANGELOG.md`, remove the task entry from `TODO.md`, integrate in a single mainline commit, and clean up any worktree/branch.
+5. **Review**: Satisfy the applicable tier before merging — PR approval, peer sign-off, solo-agent summary with human permission, or pre-authorized autonomous-loop integration.
 
 ---
 

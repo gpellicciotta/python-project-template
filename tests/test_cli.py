@@ -78,11 +78,14 @@ def test_create_scaffolds_renamed_project(tmp_path):
 
     changelog = (destination / "CHANGELOG.md").read_text(encoding="utf-8")
     assert "Initial scaffold of the Sample App project." in changelog
+    assert "## v0.0.1-pre" in changelog
+    assert "in development" not in changelog
     assert "ruff" not in changelog
 
     todo = (destination / "TODO.md").read_text(encoding="utf-8")
+    assert "**Next ID:** 0001" in todo
     assert "## Next Milestone" in todo
-    assert "### Backlog" in todo
+    assert "## Backlog" in todo
 
     assert (destination / "docs" / "requirements.md").is_file()
     assert (destination / "docs" / "devops.md").is_file()

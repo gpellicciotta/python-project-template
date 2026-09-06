@@ -51,12 +51,13 @@ This repository and all projects scaffolded from this template follow the cross-
 
 ## Conventions
 
-- `CHANGELOG.md` (top-level) tracks version history using status tags (`[in development]`, `[YYYY-MM-DD]`,
-  `[released: YYYY-MM-DD]`, `[broken]`). Bump `pyproject.toml`'s `version` for every user-facing change and
-  add a matching entry to `CHANGELOG.md`.
-- `TODO.md` (top-level) is the shared task index for planned, active, and blocked work using milestone sections
-  (`## Next Milestone`, `### Backlog`) and task status markers (`[ ]`, `[~]`, `[!]`, `[?]`). Completed tasks
-  are removed immediately from `TODO.md` upon completion (version control is the permanent record).
+- `CHANGELOG.md` (top-level) tracks version history: active in-development versions use a `-pre` suffix
+  (`vX.Y.Z-pre`), replaced on release with a status tag (`[YYYY-MM-DD]`, `[released: YYYY-MM-DD]`, `[broken]`).
+  Bump `pyproject.toml`'s `version` for every user-facing change and add a matching entry to `CHANGELOG.md`.
+- `TODO.md` (top-level) is the shared task index for planned, active, and blocked work, tracked under a
+  `**Next ID:**` counter and milestone sections (`## Next Milestone`, `## Backlog`) with task status markers
+  (`[ ]`, `[~]`, `[!]`, `[?]`). Completed tasks are removed immediately from `TODO.md` upon completion
+  (version control is the permanent record).
 - Mandatory docs: `docs/index.md`, `docs/requirements.md`, and `docs/devops.md`. Other documentation
   (design notes, ADRs, detailed specs) also lives under `docs/`.
 - Keep `README.md`'s setup/usage/layout sections in sync with the code as it evolves — treat drift there as a

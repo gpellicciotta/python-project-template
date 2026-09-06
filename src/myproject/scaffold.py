@@ -79,12 +79,12 @@ def _fresh_changelog_md(title: str) -> str:
         "> Entries will be added in reverse chronological order, so with the most recent at the top.\n"
         ">\n"
         "> Status codes used are:\n"
-        "> - `[in development]` - actively being developed\n"
+        "> - `vX.Y.Z-pre` - actively being developed (suffix on the heading itself, not a bracket tag)\n"
         "> - `[{{date}}]` - frozen/finalized on {{date}}\n"
         "> - `[released: {{date}}]` - released to package manager or production on {{date}}\n"
         "> - `[broken]` - considered broken and not be used\n\n"
         "---\n\n"
-        "## v0.0.1 [in development]\n"
+        "## v0.0.1-pre\n"
         f"- Initial scaffold of the {title} project.\n"
     )
 
@@ -94,8 +94,11 @@ def _fresh_todo_md() -> str:
         "# TODO\n\n"
         "Shared task index for planned, active, and blocked work.\n"
         "See [Coordinating Work Guidelines](https://github.com/gpellicciotta/dev-guidelines/blob/main/guidelines/coordinating-work-guidelines.md) for protocol details.\n\n"
+        "**Next ID:** 0001\n\n"
         "## Next Milestone\n\n"
-        "### Backlog\n"
+        "*(Currently no tasks)*\n\n"
+        "## Backlog\n\n"
+        "*(Currently no tasks)*\n"
     )
 
 
