@@ -72,6 +72,15 @@ The root `scripts/` directory houses non-packaged development and maintenance to
 installable package and automated test suites. Projects such as `mail-utils` use this convention for
 bootstrap scripts, roundtrip testing, and migrations.
 
+`deploy-to-production.py` is scaffolded as an example for projects derived from this template that
+deploy a running service. This template itself has no deployment target, so its `deploy` action only
+validates preconditions (clean git tree, finalized release version) and reports what it would do;
+replace the marked section with the project's actual deployment mechanism:
+
+```bash
+python scripts/deploy-to-production.py deploy --dry-run
+```
+
 ### Purpose and Scope
 Use `scripts/` for operational tasks that support developers rather than packaged library users:
 - Environment bootstrapping and dev setup automation.

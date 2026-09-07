@@ -23,10 +23,10 @@ An overview of all tasks and their planning.
 
 ## Next Milestone
 
-- [~] A0023 [owner: @claude] Add scaffolded `scripts/bootstrap-dev-environment.py` and `scripts/deploy-to-production.py` per dev-guidelines' scripts-directory convention, as an example for projects derived from this template that deploy a service; may supersede/inform A0018.
+*(Currently no tasks)*
 
 ---
 
 ## Backlog
 
-
+*(Currently no tasks)*
