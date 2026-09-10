@@ -12,7 +12,7 @@ A summarized overview of all changes, per version of this project.
 
 ---
 
-## v1.3.1-pre
+## v1.4.0-pre
 - DevEx: Added scaffolded `scripts/deploy-to-production.py` example for services deployed from this template.
 - DevEx: Ignored coverage files and tool caches in `.gitignore`, and excluded logs and caches when scaffolding.
 - DevEx: Upgraded CI to setup-python v5, added read-only permissions, and archived build artifacts.
