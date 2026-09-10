@@ -12,6 +12,8 @@ A summarized overview of all changes, per version of this project.
 
 ---
 
+## v1.4.1-pre
+
 ## v1.4.0 [released: 2026-09-10]
 - DevEx: Added scaffolded `scripts/deploy-to-production.py` example for services deployed from this template.
 - DevEx: Ignored coverage files and tool caches in `.gitignore`, and excluded logs and caches when scaffolding.
