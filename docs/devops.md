@@ -81,6 +81,26 @@ replace the marked section with the project's actual deployment mechanism:
 python scripts/deploy-to-production.py deploy --dry-run
 ```
 
+`create-github-release.py` automates creating and publishing a GitHub release from the current repository state:
+
+```bash
+# Preview release actions without making changes
+python scripts/create-github-release.py release --dry-run
+
+# Perform release
+python scripts/create-github-release.py release
+```
+
+`install-from-github-release.py` installs a specific GitHub release version from published release assets:
+
+```bash
+# Install globally via pipx (recommended for CLI tools)
+python scripts/install-from-github-release.py <version> --global
+
+# Install into current active Python environment
+python scripts/install-from-github-release.py <version>
+```
+
 ### Purpose and Scope
 Use `scripts/` for operational tasks that support developers rather than packaged library users:
 - Environment bootstrapping and dev setup automation.
@@ -125,6 +145,28 @@ Ongoing work accumulates under the top `CHANGELOG.md` heading while it carries a
 `## v1.3.1-pre`), which must always match `version` in `pyproject.toml` (the single source of truth) exactly,
 `-pre` included.
 
+### Automated Release
+Use `scripts/create-github-release.py` to automate the complete release flow:
+
+```bash
+# Validate and preview release actions
+python scripts/create-github-release.py release --dry-run
+
+# Run automated release
+python scripts/create-github-release.py release
+```
+
+The script performs the following operations:
+- Verifies a clean working tree and checks that the `gh` CLI is available.
+- Extracts release notes from `CHANGELOG.md` for the current version.
+- Finalizes the `-pre` heading in `CHANGELOG.md` and strips `-pre` in `pyproject.toml`.
+- Commits the finalized files and tags the release.
+- Pushes the mainline branch and tag to `origin`.
+- Creates a GitHub release using `gh release create` with the extracted release notes.
+- Opens the next development version in `CHANGELOG.md` and `pyproject.toml`, then commits and pushes.
+
+### Manual Release Steps
+If releasing manually without the script:
 1. Confirm the top `CHANGELOG.md` heading's version and `pyproject.toml`'s `version` already agree.
 2. Freeze: replace the heading's `-pre` suffix with `[{{date}}]`, and drop `-pre` from `pyproject.toml`'s
    `version` so both again match exactly. In the same commit, add the next patch version's `## vX.Y.Z-pre`
@@ -137,6 +179,17 @@ Ongoing work accumulates under the top `CHANGELOG.md` heading while it carries a
    ```
 4. Commit the changes and tag the release commit.
 5. Publish a GitHub Release for the tag; `.github/workflows/publish.yml` builds distribution packages and attaches them to the release.
+
+### Installing Released Versions
+Use `scripts/install-from-github-release.py` to install a specific published release wheel directly from GitHub:
+
+```bash
+# Install globally via pipx
+python scripts/install-from-github-release.py 1.3.0 --global
+
+# Install into active virtual environment
+python scripts/install-from-github-release.py 1.3.0
+```
 
 ---
 
