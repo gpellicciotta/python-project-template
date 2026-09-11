@@ -81,25 +81,42 @@ replace the marked section with the project's actual deployment mechanism:
 python scripts/deploy-to-production.py deploy --dry-run
 ```
 
-`create-github-release.py` automates creating and publishing a GitHub release from the current repository state:
+### Creating a Release with `create-github-release.py`
 
-```bash
-# Preview release actions without making changes
-python scripts/create-github-release.py release --dry-run
+The `scripts/create-github-release.py` script automates the complete release process end-to-end:
 
-# Perform release
+1. Validates preconditions (clean working tree, branch is `main`, `gh` CLI installed and authenticated, no existing remote tag or release).
+2. Runs pre-flight quality checks (`ruff check`, `ruff format --check`, `pytest`, `python -m build`).
+3. Extracts release notes for the target version from `CHANGELOG.md`.
+4. Finalizes the version in `pyproject.toml` and `CHANGELOG.md` (removing `-pre` and stamping the release date).
+5. Commits the finalized release files and creates the git tag (`v<version>`).
+6. Pushes the commit and tag to GitHub and creates the GitHub release.
+7. Opens the next patch development version (`-pre`) in `pyproject.toml` and `CHANGELOG.md` in a follow-up commit.
+
+```shell
+# Preview the release actions without making changes
+python scripts/create-github-release.py --dry-run
+
+# Create and publish the release
 python scripts/create-github-release.py release
+
+# Create and publish while skipping pre-flight checks
+python scripts/create-github-release.py release --skip-checks
 ```
 
-`install-from-github-release.py` installs a specific GitHub release version from published release assets:
+## Installing a Python Package
 
-```bash
-# Install globally via pipx (recommended for CLI tools)
-python scripts/install-from-github-release.py <version> --global
+To install a specific released version directly from GitHub releases without manual asset downloads, use `scripts/install-from-github-release.py`:
 
-# Install into current active Python environment
-python scripts/install-from-github-release.py <version>
+```shell
+# Install a specific release into the current environment
+python scripts/install-from-github-release.py 3.1.1
+
+# Install globally using pipx (or pip --user fallback)
+python scripts/install-from-github-release.py 3.1.1 --global
 ```
+
+The script determines the repository remote URL, resolves the release wheel asset on GitHub, and installs or upgrades the package using `pipx` (or `pip`).
 
 ### Purpose and Scope
 Use `scripts/` for operational tasks that support developers rather than packaged library users:

@@ -13,6 +13,7 @@ A summarized overview of all changes, per version of this project.
 ---
 
 ## v1.4.1-pre
+- DevEx: Improved `scripts/create-github-release.py` with pre-flight quality and state checks.
 
 ## v1.4.0 [released: 2026-09-10]
 - DevEx: Added scaffolded `scripts/deploy-to-production.py` example for services deployed from this template.
